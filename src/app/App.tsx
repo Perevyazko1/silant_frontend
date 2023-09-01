@@ -1,12 +1,16 @@
 import React from 'react';
-import {NavbarComponent} from "../widgets/Navbar/Navbar";
 import {MainPage} from "../pages/MainPage";
+import {Route, Routes} from "react-router-dom";
+import {ListCarPage} from "../pages/ListCarPage";
 
 
 function App() {
   return (
     <div>
-        <MainPage/>
+        <Routes>
+            <Route path="/" element={<MainPage/>}/>
+            <Route path="/listcar" element={<ListCarPage/>}/>
+        </Routes>
 
     </div>
   );
