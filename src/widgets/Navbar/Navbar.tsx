@@ -1,7 +1,7 @@
 import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import Container from 'react-bootstrap/Container';
-import {Navbar,Button, Modal, Form, Nav} from 'react-bootstrap';
+import {Navbar,Button, Modal, Form, Nav, NavDropdown} from 'react-bootstrap';
 import cls from "./Navbar.module.scss"
 
 
@@ -48,6 +48,14 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                   <Nav.Link href="tel:+7-8352-20-12-09">+7-8352-20-12-09</Nav.Link>
                   <Nav.Link href="https://telegram.org">Telegram</Nav.Link>
                 </Nav>
+                  <NavDropdown className="text-white m-2" title="Выбор страницы" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/">
+                  Главная
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/listcar">
+                Список машин
+              </NavDropdown.Item>
+            </NavDropdown>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="ms-auto">
