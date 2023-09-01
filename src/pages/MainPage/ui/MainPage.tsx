@@ -4,6 +4,7 @@ import cls from "./MainPage.module.scss"
 import {Form} from "react-bootstrap";
 import {FormSearch} from "../../../features/Form/Form";
 import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
+import {TableSearch} from "../../../features/Table/Table";
 
 interface MainPageProps {
     className?: string
@@ -32,6 +33,7 @@ const MainPage = memo((props: MainPageProps) => {
                 {...otherProps}
             >
                 <FormSearch/>
+                <TableSearch/>
             </div>
         </PageWrapper>
     );

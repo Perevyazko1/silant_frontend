@@ -1,9 +1,7 @@
 import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import {Navbar,Button, Modal, Form} from 'react-bootstrap';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import {Navbar,Button, Modal, Form, Nav} from 'react-bootstrap';
 import cls from "./Navbar.module.scss"
 
 

@@ -1,16 +1,14 @@
 import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
-import cls from "./PageWrapper.module.scss"
-import {NavbarComponent} from "../../../widgets/Navbar/Navbar";
-import {Footer} from "../Footer/Footer";
+import cls from "./ListCarPage.module.scss"
 
-interface PageWrapperProps {
+interface ListCarPageProps {
     className?: string
     children?: ReactNode
 }
 
 
-export const PageWrapper = memo((props: PageWrapperProps) => {
+ const ListCarPage = memo((props: ListCarPageProps) => {
     const {
         className,
         children,
@@ -23,13 +21,11 @@ export const PageWrapper = memo((props: PageWrapperProps) => {
 
     return (
         <div
-            className={classNames(cls.PageWrapper, mods, [className])}
+            className={classNames(cls.ListCarPage, mods, [className])}
             {...otherProps}
         >
-            <NavbarComponent/>
-
             {children}
-            <Footer/>
         </div>
     );
 });
+export default ListCarPage
