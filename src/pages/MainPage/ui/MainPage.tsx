@@ -3,6 +3,7 @@ import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./MainPage.module.scss"
 import {Form} from "react-bootstrap";
 import {FormSearch} from "../../../features/Form/Form";
+import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 
 interface MainPageProps {
     className?: string
@@ -25,12 +26,14 @@ const MainPage = memo((props: MainPageProps) => {
     };
     
     return (
-        <div
-            className={classNames(cls.MainPage, mods, [className])}
-            {...otherProps}
-        >
-            <FormSearch/>
-        </div>
+        <PageWrapper>
+            <div
+                className={classNames(cls.MainPage, mods, [className])}
+                {...otherProps}
+            >
+                <FormSearch/>
+            </div>
+        </PageWrapper>
     );
 });
 export default MainPage

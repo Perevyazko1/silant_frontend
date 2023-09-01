@@ -6,7 +6,6 @@ import {MainPage} from "../pages/MainPage";
 function App() {
   return (
     <div>
-        <NavbarComponent/>
         <MainPage/>
 
     </div>
