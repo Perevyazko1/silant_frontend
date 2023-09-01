@@ -2,6 +2,8 @@ import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./ListCarPage.module.scss"
 import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
+import {TableSearch} from "../../../features/Table/Table";
+import {Filter} from "../../../widgets/Filter/Filter";
 
 interface ListCarPageProps {
     className?: string
@@ -26,6 +28,8 @@ interface ListCarPageProps {
                 className={classNames(cls.ListCarPage, mods, [className])}
                 {...otherProps}
             >
+                <Filter/>
+                <TableSearch/>
                 {children}
             </div>
         </PageWrapper>
