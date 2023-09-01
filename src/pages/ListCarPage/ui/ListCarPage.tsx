@@ -1,6 +1,7 @@
 import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./ListCarPage.module.scss"
+import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 
 interface ListCarPageProps {
     className?: string
@@ -20,12 +21,14 @@ interface ListCarPageProps {
     };
 
     return (
-        <div
-            className={classNames(cls.ListCarPage, mods, [className])}
-            {...otherProps}
-        >
-            {children}
-        </div>
+        <PageWrapper>
+            <div
+                className={classNames(cls.ListCarPage, mods, [className])}
+                {...otherProps}
+            >
+                {children}
+            </div>
+        </PageWrapper>
     );
 });
 export default ListCarPage
