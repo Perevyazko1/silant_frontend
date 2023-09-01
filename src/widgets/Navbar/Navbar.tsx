@@ -39,10 +39,11 @@ export const NavbarComponent = memo((props: NavbarProps) => {
     
     return (
         <div
-            className={classNames(cls.Navbar, mods, [className])}
-            {...otherProps}
+
         >
-            <Navbar bg="light" expand="lg">
+            <Navbar className={classNames(cls.Navbar, mods, [className])}
+            {...otherProps}
+                bg="dark" variant="dark" expand="lg" >
               <Container>
                 <Navbar.Brand href="#">Силант</Navbar.Brand>
                 <Nav className="me-auto">
@@ -53,7 +54,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="ms-auto">
                     <Nav.Link href="#">Электронная сервисная книжка Мой Силант</Nav.Link>
-                    <Button onClick={handleShow} variant="primary">Авторизация</Button>
+                    <Button  onClick={handleShow}  variant="warning">Авторизация</Button>
                   </Nav>
                 </Navbar.Collapse>
               </Container>
@@ -74,7 +75,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                       <Form.Control type="password" placeholder="Введите пароль" />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button className="m-2" variant="warning" type="submit">
                       Войти
                     </Button>
                   </Form>
