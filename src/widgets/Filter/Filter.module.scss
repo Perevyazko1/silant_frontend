@@ -11,8 +11,14 @@
 .Form{
     display: flex;
     flex-wrap: wrap;
+    margin: 0 auto;
 }
 .Input{
     width: 340px;
     margin: 20px;
+}
+.Button{
+    margin: 10px;
+    width: 340px;
+
 }

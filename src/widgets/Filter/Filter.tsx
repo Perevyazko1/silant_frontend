@@ -80,10 +80,12 @@ export const Filter = memo((props: FilterProps) => {
                   <option>Модель 3</option>
                 </Form.Control>
               </Form.Group>
+                <div className={cls.Button}>
+                  <Button className="m-3" variant="warning" type="submit">
+                        Найти
+                  </Button>
+                </div>
 
-              <Button className="m-3" variant="warning" type="submit">
-                Найти
-              </Button>
             </Form>
             {children}
         </div>
