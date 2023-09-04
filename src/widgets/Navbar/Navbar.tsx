@@ -1,8 +1,13 @@
-import {memo, ReactNode, useState} from 'react';
+import {memo, ReactNode, useState, useEffect} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import Container from 'react-bootstrap/Container';
 import {Navbar,Button, Modal, Form, Nav, NavDropdown} from 'react-bootstrap';
+import {Link} from "react-router-dom";
 import cls from "./Navbar.module.scss"
+import {postApi} from "../../providers/Api/RtkService";
+import {Token} from "../../providers/Api/models/Token";
+import {useAppdispatch, useAppSelector} from "../../shared/hooks/redux";
+import {authPageSlice} from "../../providers/Api/models/slice/AuthSlice";
 
 
 interface NavbarProps {
@@ -13,15 +18,69 @@ interface NavbarProps {
 
 export const NavbarComponent = memo((props: NavbarProps) => {
 
+      const dispatch = useAppdispatch()
+      const {isUsername} = authPageSlice.actions
+      const {username} = useAppSelector(state=>state.authReducer)
+
+      const {isAuthenticated} = authPageSlice.actions
+      const {authenticated} =useAppSelector(state=>state.authReducer)
+
+      const [auth, setAuth] = useState(authenticated)
+      const [user, setUser] = useState(username)
       const [show, setShow] = useState(false);
+
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
+      const localStorageСlear = () => {
+          setAuth(false)
+          setUser("не авторизирован")
+        }
 
-      // const handleSubmit = (event) => {
-      //   event.preventDefault();
-      //   // Ваши действия по обработке данных формы авторизации
-      //   // Например, вызов функции для проверки логина и пароля
-      // }
+      const [login, setLogin] = useState("")
+      const [password, setPassword] = useState("")
+
+
+
+
+      const [loginApi,{data, isLoading, error}] = postApi.useLoginApiMutation()
+
+        const onLogin = async (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        try {
+            const dataUser = {
+              username: login,
+              password: password
+            };
+            await loginApi(dataUser as Token)
+            if(data?.authenticated){
+
+            }
+
+
+        } catch (error) {
+            console.log(`Ошибка ${error}`)
+        }
+
+      };
+        useEffect(()=>{
+           console.log(JSON.stringify(`дата ${data}`),JSON.stringify(isLoading),JSON.stringify(error))
+            if(data){
+                dispatch(isAuthenticated(data.authenticated))
+                dispatch(isUsername(data.username))
+                if (data.authenticated){
+                   handleClose()
+                }
+                else {
+                    alert("Неверный логин или пароль")
+                }
+                setUser(data.username)
+                setAuth(data.authenticated)
+
+            }
+        }
+        ,[data]
+    )
+
 
 
 
@@ -43,47 +102,48 @@ export const NavbarComponent = memo((props: NavbarProps) => {
             {...otherProps}
                 bg="dark" variant="dark" expand="lg" >
               <Container>
-                <Navbar.Brand href="#">Силант</Navbar.Brand>
+                <Navbar.Brand href="#">Силант </Navbar.Brand>
                 <Nav className="me-auto">
                   <Nav.Link href="tel:+7-8352-20-12-09">+7-8352-20-12-09</Nav.Link>
                   <Nav.Link href="https://telegram.org">Telegram</Nav.Link>
                 </Nav>
                   <NavDropdown className="text-white m-2" title="Выбор страницы" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/">
-                  Главная
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/listcar">
-                Список машин
-              </NavDropdown.Item>
-            </NavDropdown>
+                    <Link className="dropdown-item" to={"/"}>
+                      Главная
+                    </Link>
+                    <Link className="dropdown-item" to={"/listcar"}>
+                      Список машин
+                    </Link>
+                  </NavDropdown>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                    <h6 className="text-white">  Пользователь {user}</h6>
                   <Nav className="ms-auto">
                     <Nav.Link href="#">Электронная сервисная книжка Мой Силант</Nav.Link>
-                    <Button  onClick={handleShow}  variant="warning">Авторизация</Button>
+                      {auth?(<Button onClick={localStorageСlear} className="m-2" variant="warning" type="submit">Выйти</Button>):(<Button  onClick={handleShow}  variant="warning">Авторизация</Button>)}
+
                   </Nav>
                 </Navbar.Collapse>
               </Container>
             </Navbar>
             <Modal show={show} onHide={handleClose}>
+                {authenticated?(<div></div>):(<h6>Неверный логин или пароль</h6>) }
                 <Modal.Header closeButton>
                   <Modal.Title>Авторизация</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+
                   <Form >
                     <Form.Group controlId="formLogin">
                       <Form.Label>Логин</Form.Label>
-                      <Form.Control type="text" placeholder="Введите логин" />
+                      <Form.Control onChange={(event)=> setLogin(event.target.value)} type="text" placeholder="Введите логин" />
                     </Form.Group>
 
                     <Form.Group controlId="formPassword">
                       <Form.Label>Пароль</Form.Label>
-                      <Form.Control type="password" placeholder="Введите пароль" />
+                      <Form.Control onChange={(event) => setPassword(event.target.value)} type="password" placeholder="Введите пароль" />
                     </Form.Group>
-
-                    <Button className="m-2" variant="warning" type="submit">
-                      Войти
-                    </Button>
+                      <Button onClick={onLogin} className="m-2" variant="warning" type="submit">Войти</Button>
                   </Form>
                 </Modal.Body>
           </Modal>
