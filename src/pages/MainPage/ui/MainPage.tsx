@@ -7,6 +7,7 @@ import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 import {TableSearch} from "../../../features/Table/Table";
 import {postApi} from "../../../providers/Api/RtkService";
 import {User} from "../../../providers/Api/models/User";
+import {useAppSelector} from "../../../shared/hooks/redux";
 
 interface MainPageProps {
     className?: string
@@ -16,7 +17,8 @@ interface MainPageProps {
 
 const MainPage = memo((props: MainPageProps) => {
 
-
+    const {isloading}=useAppSelector(state=>state.carInfo)
+    console.log(`проверка${isloading}`)
     const {
         className,
         children,
@@ -37,7 +39,7 @@ const MainPage = memo((props: MainPageProps) => {
                 {...otherProps}
             >
                 <FormSearch/>
-                <TableSearch/>
+                {isloading && <TableSearch/>}
             </div>
         </PageWrapper>
     );

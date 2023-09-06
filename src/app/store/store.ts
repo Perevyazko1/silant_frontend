@@ -1,11 +1,16 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {postApi} from "../../providers/Api/RtkService";
-import authReducer from "../../providers/Api/models/slice/AuthSlice";
-import carInfo from "../../providers/Api/models/slice/CarSlice";
+import authReducer from "../../providers/Api/slice/AuthSlice";
+import carInfo from "../../providers/Api/slice/CarSlice";
+import complaintsInfo from "../../providers/Api/slice/ComplaintsSlice"
+import maintenanceInfo from "../../providers/Api/slice/MaintenanceSlice"
 
 const rootReducer = combineReducers({
     authReducer,
     carInfo,
+    complaintsInfo,
+    maintenanceInfo,
+
     [postApi.reducerPath]: postApi.reducer
 })
 

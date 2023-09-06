@@ -7,7 +7,8 @@ import cls from "./Navbar.module.scss"
 import {postApi} from "../../providers/Api/RtkService";
 import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/redux";
-import {authPageSlice} from "../../providers/Api/models/slice/AuthSlice";
+import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
+import {useDispatch} from "react-redux";
 
 
 interface NavbarProps {
@@ -19,8 +20,10 @@ interface NavbarProps {
 export const NavbarComponent = memo((props: NavbarProps) => {
 
       const dispatch = useAppdispatch()
+      const {isRole} = authPageSlice.actions
       const {isUsername} = authPageSlice.actions
       const {username} = useAppSelector(state=>state.authReducer)
+
 
       const {isAuthenticated} = authPageSlice.actions
       const {authenticated} =useAppSelector(state=>state.authReducer)
@@ -60,10 +63,10 @@ export const NavbarComponent = memo((props: NavbarProps) => {
 
       };
         useEffect(()=>{
-           console.log(JSON.stringify(`дата ${data}`),JSON.stringify(isLoading),JSON.stringify(error))
             if(data){
                 dispatch(isAuthenticated(data.authenticated))
                 dispatch(isUsername(data.username))
+                dispatch((isRole(data.role)))
                 if (data.authenticated){
                    handleClose()
                    localStorage.setItem("token",data.token)

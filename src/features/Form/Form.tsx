@@ -7,7 +7,9 @@ import {skipToken} from "@reduxjs/toolkit/query";
 import MainAPI from "../../providers/Api/axios";
 import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/redux";
-import {carInfoSlice} from "../../providers/Api/models/slice/CarSlice";
+import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
+import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
+import {complaintsInfoSlice} from "../../providers/Api/slice/ComplaintsSlice";
 
 interface FormProps {
     className?: string
@@ -19,7 +21,10 @@ export const FormSearch = memo((props: FormProps) => {
 
     const dispatch = useAppdispatch()
     const {infoCar} = carInfoSlice.actions
-    const {object} = useAppSelector(state=>state.carInfo)
+    const {isLoadingCar} = carInfoSlice.actions
+    const {MaintenanceInfo} = maintenanceInfoSlice.actions
+    const {ComplaintsInfo} = complaintsInfoSlice.actions
+
 
 
     const [source,setSource]=useState("machine")
@@ -46,10 +51,15 @@ export const FormSearch = memo((props: FormProps) => {
         event.preventDefault();
 
         try {
-            let result = await MainAPI.get_data(`service/api/${source}/?factory_number=${number_car}`)
-            console.log(result)
-            dispatch(infoCar(result))
-            if (!result){
+            let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${number_car}`)
+            let maintenance = await MainAPI.get_data(`service/api/maintenance/?factory_number=${number_car}`)
+            let complaints = await MainAPI.get_data(`service/api/complaints/?factory_number=${number_car}`)
+
+            dispatch(infoCar(machine))
+            dispatch(MaintenanceInfo(maintenance))
+            dispatch(ComplaintsInfo(complaints))
+            dispatch((isLoadingCar(true)))
+            if (!machine){
                 alert("Такого номера не существует")
             }
 
