@@ -1,8 +1,6 @@
-export interface Token {
-    username: string
-    password: string
-    first_name: string
+export interface Token{
     accessToken: string
-    authenticated: boolean
+    source: string
+    number_car: string
 
 }

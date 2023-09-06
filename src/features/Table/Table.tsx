@@ -2,6 +2,7 @@ import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import {Button, Table} from 'react-bootstrap';
 import cls from "./Table.module.scss"
+import {useAppSelector} from "../../shared/hooks/redux";
 
 interface TableProps {
     className?: string
@@ -10,6 +11,10 @@ interface TableProps {
 
 
 export const TableSearch = memo((props: TableProps) => {
+    const {object} = useAppSelector(state=>state.carInfo)
+    const handleGetData = ()=>(
+        console.log(object)
+    )
     const {
         className,
         children,
@@ -28,7 +33,7 @@ export const TableSearch = memo((props: TableProps) => {
             <h2 className={cls.Header}>Клиент/Сервисная компания</h2>
           <h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>
           <div className={cls.ContainerButton}>
-            <Button className={cls.Button} variant="warning">Общая инфо</Button>
+            <Button onClick={handleGetData} className={cls.Button} variant="warning">Общая инфо</Button>
             <Button className={cls.Button} variant="warning">ТО</Button>
             <Button className={cls.Button} variant="warning">Рекламации</Button>
           </div>

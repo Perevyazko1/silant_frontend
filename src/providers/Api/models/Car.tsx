@@ -1,0 +1,20 @@
+export interface Car{
+    "Cервисная компания": null|string,
+      "Адрес поставки (эксплуатации)": null|string,
+      "Грузополучатель (конечный потребитель)": null|string,
+      "Дата отгрузки с завода": null|string,
+      "Договор поставки №, дата": null|string,
+      "Зав. № ведущего моста": null|string,
+      "Зав. № двигателя": null|string,
+      "Зав. № машины": null|string,
+      "Зав. № трансмиссии": null|string,
+      "Зав. № управляемого моста": null|string,
+      "Клиент": null|string,
+      "Комплектация (доп. опции)": null|string,
+      "Модель ведущего моста": null|string,
+      "Модель двигателя": null|string,
+      "Модель машины": null|string,
+      "Модель трансмиссии": null|string,
+      "Модель управляемого моста": null|string,
+
+}

@@ -5,7 +5,7 @@ import {Navbar,Button, Modal, Form, Nav, NavDropdown} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import cls from "./Navbar.module.scss"
 import {postApi} from "../../providers/Api/RtkService";
-import {Token} from "../../providers/Api/models/Token";
+import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/redux";
 import {authPageSlice} from "../../providers/Api/models/slice/AuthSlice";
 
@@ -51,10 +51,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
               username: login,
               password: password
             };
-            await loginApi(dataUser as Token)
-            if(data?.authenticated){
-
-            }
+            await loginApi(dataUser as User)
 
 
         } catch (error) {
@@ -69,7 +66,9 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                 dispatch(isUsername(data.username))
                 if (data.authenticated){
                    handleClose()
+                   localStorage.setItem("token",data.token)
                 }
+
                 else {
                     alert("Неверный логин или пароль")
                 }

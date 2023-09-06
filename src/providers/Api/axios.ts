@@ -2,17 +2,33 @@ import axios from "axios";
 
 export default class MainAPI {
 
-    async login(username: string, password: string) {
-        try {
-            const response = await axios.post(`http://127.0.0.1:8000/users/api-token/`,
-                {
-                    'username': username,
-                    'password': password
+        static async get_data(source:string, param=null) {
+        let axios_headers = {}
+        let axios_url = `http://127.0.0.1:8000/${source}`
+        if (param) {
+            axios_url += `${param}`
+        }
+        if (localStorage.getItem('token') !== '') {
+             axios_headers = {
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('token')}`
                 }
-            )
+            }
+        }
+        try {
+            const
+                response = await axios.get(axios_url,
+                    {
+                        ...axios_headers
+                    }
+                )
             return response.data
-        } catch (e) {
+        } catch
+            (e) {
             console.log(e)
         }
+
+
     }
+
 }

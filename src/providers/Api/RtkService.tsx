@@ -1,4 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
+import {User} from "./models/User";
 import {Token} from "./models/Token";
 // import {Patch} from "../StoreProvider/models/Patch";
 
@@ -11,7 +12,7 @@ export const postApi = createApi({
     }),
     tagTypes: ['Post'],
     endpoints: (build) => ({
-        loginApi: build.mutation<Token, Token>({
+        loginApi: build.mutation<User, User>({
             query: ({ username, password }) => ({
                 url:`/users/api-token/`,
                 method: 'POST',
@@ -19,23 +20,23 @@ export const postApi = createApi({
                     'username': username,
                     'password': password
                 },
-                // headers: {
-                //     'Content-Type': 'application/json',
-                //     'Accept': 'application/json'
-                // }
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
             }),
             invalidatesTags: ['Post']
         }),
-        // companyCount: build.query({
-        //     query:(arg)=>({
-        //         url: `/account/info` ,
-        //         headers: {
-        //             authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        //         }
-        //
-        // }),
-        //     providesTags: result => ["Post"]
-        // }),
+        getData: build.query<Token, Token>({
+            query:({source,number_car})=>({
+                url: `service/api/${source}/?factory_number=${number_car}` ,
+                headers: {
+                    authorization: `Token ${localStorage.getItem('token')}`
+                }
+
+        }),
+            providesTags: result => ["Post"]
+        }),
         // objectSearch: build.mutation<Patch, Patch>({
         //     query: ({patch,
         //                 inn,

@@ -1,10 +1,12 @@
-import {memo, ReactNode} from 'react';
+import {memo, ReactNode, useEffect, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./MainPage.module.scss"
 import {Form} from "react-bootstrap";
 import {FormSearch} from "../../../features/Form/Form";
 import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 import {TableSearch} from "../../../features/Table/Table";
+import {postApi} from "../../../providers/Api/RtkService";
+import {User} from "../../../providers/Api/models/User";
 
 interface MainPageProps {
     className?: string
@@ -13,6 +15,8 @@ interface MainPageProps {
 
 
 const MainPage = memo((props: MainPageProps) => {
+
+
     const {
         className,
         children,
