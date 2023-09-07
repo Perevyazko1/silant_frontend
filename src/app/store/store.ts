@@ -4,12 +4,15 @@ import authReducer from "../../providers/Api/slice/AuthSlice";
 import carInfo from "../../providers/Api/slice/CarSlice";
 import complaintsInfo from "../../providers/Api/slice/ComplaintsSlice"
 import maintenanceInfo from "../../providers/Api/slice/MaintenanceSlice"
+import listMachine from "../../providers/Api/slice/ListMachineSlice";
 
 const rootReducer = combineReducers({
     authReducer,
     carInfo,
     complaintsInfo,
     maintenanceInfo,
+    listMachine,
+
 
     [postApi.reducerPath]: postApi.reducer
 })

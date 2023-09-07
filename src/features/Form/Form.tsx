@@ -27,24 +27,11 @@ export const FormSearch = memo((props: FormProps) => {
 
 
 
-    const [source,setSource]=useState("machine")
     const [number_car,setNumber_car]=useState("")
     const [reqwest,setReqwest]=useState(false)
 
     console.log(`загрузка ${reqwest}`)
 
-    // const [data,setData] = useState("")
-    // const [isLoading, setIsloading] = useState("")
-    // const [error, setError] = useState("")
-
-      const { data, isLoading, error } = postApi.useGetDataQuery({
-        source: source,
-        number_car: number_car,
-        accessToken: "14ecfc3d6eef17475d7d8ee8526cc8f8fcfa39dd"
-      },{skip:!reqwest});
-      // setData(JSON.stringify(data));
-      // setError(JSON.stringify(error));
-      // setIsloading(JSON.stringify(isLoading));
 
 
         const get_info = async (event: { preventDefault: () => void; }) => {
@@ -64,19 +51,10 @@ export const FormSearch = memo((props: FormProps) => {
             }
 
         }
-
-
          catch (error) {
             console.log(`Ошибка ${error}`)
         }}
 
-
-
-    // useEffect(()=>{
-    //     console.log(result)
-    //     console.log(isLoading)
-    //     console.log(error)
-    // },[result])
 
 
 

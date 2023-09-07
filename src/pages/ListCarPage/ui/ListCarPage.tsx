@@ -4,6 +4,7 @@ import cls from "./ListCarPage.module.scss"
 import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 import {TableSearch} from "../../../features/Table/Table";
 import {Filter} from "../../../widgets/Filter/Filter";
+import {TableListCar} from "../../../features/TableListCar/TableListCar";
 
 interface ListCarPageProps {
     className?: string
@@ -29,7 +30,7 @@ interface ListCarPageProps {
                 {...otherProps}
             >
                 <Filter/>
-                <TableSearch/>
+                <TableListCar/>
                 {children}
             </div>
         </PageWrapper>
