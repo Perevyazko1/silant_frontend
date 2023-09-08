@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import cls from "./Navbar.module.scss"
 import {postApi} from "../../providers/Api/RtkService";
 import {User} from "../../providers/Api/models/User";
-import {useAppdispatch, useAppSelector} from "../../shared/hooks/redux";
+import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
 import {useDispatch} from "react-redux";
 

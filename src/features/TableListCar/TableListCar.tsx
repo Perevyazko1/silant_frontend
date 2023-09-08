@@ -2,7 +2,7 @@ import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./TableListCar.module.scss"
 import {Button, Form, Table} from "react-bootstrap";
-import {useAppSelector} from "../../shared/hooks/redux";
+import {useAppSelector} from "../../shared/hooks/Redux/redux";
 import MainAPI from "../../providers/Api/axios";
 
 interface TableListCarProps {

@@ -2,7 +2,7 @@ import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import {Button, Table,Form} from 'react-bootstrap';
 import cls from "./Table.module.scss"
-import {useAppSelector} from "../../shared/hooks/redux";
+import {useAppSelector} from "../../shared/hooks/Redux/redux";
 
 interface TableProps {
     className?: string

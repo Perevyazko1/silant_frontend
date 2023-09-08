@@ -6,7 +6,7 @@ import {postApi} from "../../providers/Api/RtkService";
 import {skipToken} from "@reduxjs/toolkit/query";
 import MainAPI from "../../providers/Api/axios";
 import {User} from "../../providers/Api/models/User";
-import {useAppdispatch, useAppSelector} from "../../shared/hooks/redux";
+import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
 import {complaintsInfoSlice} from "../../providers/Api/slice/ComplaintsSlice";

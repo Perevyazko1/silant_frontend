@@ -7,7 +7,7 @@ import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 import {TableSearch} from "../../../features/Table/Table";
 import {postApi} from "../../../providers/Api/RtkService";
 import {User} from "../../../providers/Api/models/User";
-import {useAppSelector} from "../../../shared/hooks/redux";
+import {useAppSelector} from "../../../shared/hooks/Redux/redux";
 
 interface MainPageProps {
     className?: string
