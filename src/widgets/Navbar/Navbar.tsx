@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import {Navbar,Button, Modal, Form, Nav, NavDropdown} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import cls from "./Navbar.module.scss"
+import brand from "../../app/style/icons/Logotype accent RGB 2.jpg"
 import {postApi} from "../../providers/Api/RtkService";
 import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
@@ -104,7 +105,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
             {...otherProps}
                 bg="dark" variant="dark" expand="lg" >
               <Container>
-                <Navbar.Brand href="#">Силант </Navbar.Brand>
+                <Navbar.Brand href="#"><img className={cls.Brand} src={brand}/> </Navbar.Brand>
                 <Nav className="me-auto">
                   <Nav.Link href="tel:+7-8352-20-12-09">+7-8352-20-12-09</Nav.Link>
                   <Nav.Link href="https://telegram.org">Telegram</Nav.Link>
@@ -129,7 +130,6 @@ export const NavbarComponent = memo((props: NavbarProps) => {
               </Container>
             </Navbar>
             <Modal show={show} onHide={handleClose}>
-                {authenticated?(<div></div>):(<h6>Неверный логин или пароль</h6>) }
                 <Modal.Header closeButton>
                   <Modal.Title>Авторизация</Modal.Title>
                 </Modal.Header>
@@ -145,7 +145,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                       <Form.Label>Пароль</Form.Label>
                       <Form.Control onChange={(event) => setPassword(event.target.value)} type="password" placeholder="Введите пароль" />
                     </Form.Group>
-                      <Button onClick={onLogin} className="m-2" variant="warning" type="submit">Войти</Button>
+                      <Button onClick={onLogin}   variant="warning" type="submit">Войти</Button>
                   </Form>
                 </Modal.Body>
           </Modal>

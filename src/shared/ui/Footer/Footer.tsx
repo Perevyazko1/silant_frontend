@@ -1,7 +1,6 @@
 import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import { Container } from 'react-bootstrap';
-import Nav from 'react-bootstrap/Nav';
 import cls from "./Footer.module.scss"
 
 interface FooterProps {
@@ -26,7 +25,7 @@ export const Footer = memo((props: FooterProps) => {
             className={classNames(cls.Footer, mods, [className])}
             {...otherProps}
         >
-            <footer className="bg-dark py-3">
+            <footer>
               <Container>
                 <div className="d-flex justify-content-between">
                   <div>

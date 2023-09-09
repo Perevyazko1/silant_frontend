@@ -1,13 +1,11 @@
-import {memo, ReactNode, useEffect, useState} from 'react';
+import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./MainPage.module.scss"
-import {Form} from "react-bootstrap";
 import {FormSearch} from "../../../features/Form/Form";
 import {PageWrapper} from "../../../shared/ui/PageWrapper/PageWrapper";
 import {TableSearch} from "../../../features/Table/Table";
-import {postApi} from "../../../providers/Api/RtkService";
-import {User} from "../../../providers/Api/models/User";
 import {useAppSelector} from "../../../shared/hooks/Redux/redux";
+import {Carusel} from "../../../widgets/Carusel/Carusel";
 
 interface MainPageProps {
     className?: string
@@ -40,6 +38,7 @@ const MainPage = memo((props: MainPageProps) => {
             >
                 <FormSearch/>
                 {isloading && <TableSearch/>}
+                <Carusel/>
             </div>
         </PageWrapper>
     );

@@ -1,7 +1,12 @@
 .Navbar{
     //position: fixed;
+    font-family: var(--font-italic-regular);
     width: 100%;
     height: 100px;
+    background: var(--app-color-main) !important;
     //margin-top: -20px;
 
+}
+.Brand{
+    width: 50px;
 }

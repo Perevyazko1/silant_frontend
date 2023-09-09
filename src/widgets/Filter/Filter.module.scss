@@ -1,6 +1,8 @@
 .Filter{
     width: 90%;
-    background: #747474;
+    background: var(--app-color-main);
+    font-family:  var(--font-italic-regular) ;
+    color: var(--app-background);
     padding: 20px;
     border-radius: 5px;
     margin: 20px auto;

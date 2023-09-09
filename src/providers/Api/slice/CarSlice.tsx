@@ -4,6 +4,7 @@ import {Car} from "../models/Car";
 export interface CarInfoState {
     car:Car;
     isloading:boolean
+    numberCar: string
 }
 
 const initialState: CarInfoState = {
@@ -27,7 +28,8 @@ const initialState: CarInfoState = {
   "Модель трансмиссии": "",
   "Модель управляемого моста": "",
 },
-    isloading:false
+    isloading:false,
+    numberCar: ""
 }
 
 export const carInfoSlice = createSlice({
@@ -37,6 +39,10 @@ export const carInfoSlice = createSlice({
         infoCar(state, action: PayloadAction<Car>){
             state.car = action.payload
         },
+        numberCars(state, action: PayloadAction<string>){
+            state.numberCar = action.payload
+        },
+
         isLoadingCar(state, action: PayloadAction<boolean>){
             state.isloading = action.payload
         },

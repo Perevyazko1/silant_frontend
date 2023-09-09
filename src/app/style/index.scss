@@ -1,14 +1,24 @@
+@import "fonts";
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+:root{
+    --app-background:  #EBE6D6;
+    --app-color-button: #D20A11;
+    --app-color-main:  #163E6C;
+
+
+
+    --font-bold: "Astra-Sans_Bold";
+    --font-bold-italic: "Astra-Sans_Bold-Italic";
+    --font-italic: "Astra-Sans_Italic";
+    --font-italic-regular: "Astra-Sans_Regular";
+
+
+
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+Button{
+    background: var(--app-color-button) !important;
+    border-color: var(--app-color-button) !important;
+    color: var(--app-background) !important;
+    margin: 10px!important;
 }

@@ -1,11 +1,8 @@
 import {memo, ReactNode, useEffect, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
-import { Form, Button, Container } from 'react-bootstrap';
+import {Button, Form} from 'react-bootstrap';
 import cls from "./Form.module.scss"
-import {postApi} from "../../providers/Api/RtkService";
-import {skipToken} from "@reduxjs/toolkit/query";
 import MainAPI from "../../providers/Api/axios";
-import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
@@ -21,16 +18,14 @@ export const FormSearch = memo((props: FormProps) => {
 
     const dispatch = useAppdispatch()
     const {infoCar} = carInfoSlice.actions
+    const {numberCar} = useAppSelector(state => state.carInfo)
     const {isLoadingCar} = carInfoSlice.actions
     const {MaintenanceInfo} = maintenanceInfoSlice.actions
     const {ComplaintsInfo} = complaintsInfoSlice.actions
+    console.log(`номер ${numberCar}`)
 
 
-
-    const [number_car,setNumber_car]=useState("")
-    const [reqwest,setReqwest]=useState(false)
-
-    console.log(`загрузка ${reqwest}`)
+    const [number_car,setNumber_car]=useState(numberCar)
 
 
 
@@ -56,7 +51,18 @@ export const FormSearch = memo((props: FormProps) => {
         }}
 
 
+        useEffect(()=>{
+            setNumber_car(numberCar)
+        },[numberCar])
 
+        useEffect(() => {
+        const event = {
+            preventDefault: () => {},
+        };if(number_car){
+            get_info(event);
+            }
+
+    }, [numberCar]);
 
     const {
         className,

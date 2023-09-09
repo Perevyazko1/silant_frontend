@@ -1,9 +1,11 @@
 import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./TableListCar.module.scss"
-import {Button, Form, Table} from "react-bootstrap";
-import {useAppSelector} from "../../shared/hooks/Redux/redux";
-import MainAPI from "../../providers/Api/axios";
+import {Button, Form, Table, Modal} from "react-bootstrap";
+import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
+import {TableSearch} from "../Table/Table";
+import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
+import {useNavigate} from "react-router-dom";
 
 interface TableListCarProps {
     className?: string
@@ -12,9 +14,19 @@ interface TableListCarProps {
 
 
 export const TableListCar = memo((props: TableListCarProps) => {
+    const dispatch = useAppdispatch()
+    const {numberCars} = carInfoSlice.actions
+    const {numberCar} = useAppSelector(state => state.carInfo)
     const {role} = useAppSelector(state=>state.authReducer)
     const {listMachine} =useAppSelector(state => state.listMachine)
+    const navigate = useNavigate()
     // const [listMachine, setListMachine] = useState()
+    const [showModal, setShowModal] = useState(false);
+
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
 
 
@@ -37,6 +49,20 @@ export const TableListCar = memo((props: TableListCarProps) => {
         >
           <h4 className={cls.Header}>Список машин</h4>
 
+                <Modal show={showModal} onHide={closeModal}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Информация о комплектации и технических характеристиках вашей техники</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <TableSearch/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={closeModal}>
+                        Закрыть
+                      </Button>
+                    </Modal.Footer>
+                </Modal>
+
                 <Table striped bordered hover responsive>
                     <thead>
                         <tr>
@@ -53,10 +79,14 @@ export const TableListCar = memo((props: TableListCarProps) => {
                             Array.isArray(listMachine.machine_list_data) &&
                             listMachine.machine_list_data.map((machine) => (
                                 <tr key={machine.id}
-                                    // onClick={() => get_info(machine.factory_number)}
+
                                 >
                                     <td>{machine.machine_model__name}</td>
-                                    <td>{machine.factory_number}</td>
+                                    <td
+                                        onClick={() => {dispatch(numberCars(machine.factory_number))
+                                                            navigate("/")
+                                        }}
+                                    >{machine.factory_number}</td>
                                     <td>{machine.engine_model__name}</td>
                                     <td>{machine.transmission_model__name}</td>
                                     <td>{machine.driving_bridge_model__name}</td>
