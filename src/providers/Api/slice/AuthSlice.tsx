@@ -15,8 +15,8 @@ export interface AuthPageState {
 const initialState: AuthPageState = {
 
     id:0,
-    username:"не авторизирован",
-    first_name:"не авторизирован",
+    username:"",
+    first_name:"",
     last_name:"",
     token:"",
     role:"",

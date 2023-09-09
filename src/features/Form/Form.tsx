@@ -22,7 +22,6 @@ export const FormSearch = memo((props: FormProps) => {
     const {isLoadingCar} = carInfoSlice.actions
     const {MaintenanceInfo} = maintenanceInfoSlice.actions
     const {ComplaintsInfo} = complaintsInfoSlice.actions
-    console.log(`номер ${numberCar}`)
 
 
     const [number_car,setNumber_car]=useState(numberCar)
@@ -36,7 +35,6 @@ export const FormSearch = memo((props: FormProps) => {
             let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${number_car}`)
             let maintenance = await MainAPI.get_data(`service/api/maintenance/?factory_number=${number_car}`)
             let complaints = await MainAPI.get_data(`service/api/complaints/?factory_number=${number_car}`)
-
             dispatch(infoCar(machine))
             dispatch(MaintenanceInfo(maintenance))
             dispatch(ComplaintsInfo(complaints))

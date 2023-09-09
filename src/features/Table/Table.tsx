@@ -36,7 +36,6 @@ export const TableSearch = memo((props: TableProps) => {
             className={classNames(cls.TableSearch, mods, [className])}
             {...otherProps}
         >
-            {username!=="не авторизирован" &&<h2 className={cls.Header}>{username}</h2>}
           <h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>
           <div className={cls.ContainerButton}>
             <Button onClick={()=>{setIsCar(true); setIsMaintenance(false); setIsComplaints(false)}} className={cls.Button} variant="warning">Общая инфо</Button>

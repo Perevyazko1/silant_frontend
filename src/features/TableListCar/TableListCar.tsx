@@ -49,20 +49,6 @@ export const TableListCar = memo((props: TableListCarProps) => {
         >
           <h4 className={cls.Header}>Список машин</h4>
 
-                <Modal show={showModal} onHide={closeModal}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Информация о комплектации и технических характеристиках вашей техники</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <TableSearch/>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={closeModal}>
-                        Закрыть
-                      </Button>
-                    </Modal.Footer>
-                </Modal>
-
                 <Table striped bordered hover responsive>
                     <thead>
                         <tr>

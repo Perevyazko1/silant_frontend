@@ -37,7 +37,8 @@ export const NavbarComponent = memo((props: NavbarProps) => {
       const handleShow = () => setShow(true);
       const localStorageСlear = () => {
           setAuth(false)
-          setUser("не авторизирован")
+          setUser("")
+          localStorage.setItem("token","22548518cfa3d41af718c4b4a34aae335c89b606")
         }
 
       const [login, setLogin] = useState("")
@@ -71,6 +72,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                 if (data.authenticated){
                    handleClose()
                    localStorage.setItem("token",data.token)
+
                 }
 
                 else {
@@ -110,17 +112,19 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                   <Nav.Link href="tel:+7-8352-20-12-09">+7-8352-20-12-09</Nav.Link>
                   <Nav.Link href="https://telegram.org">Telegram</Nav.Link>
                 </Nav>
-                  <NavDropdown className="text-white m-2" title="Выбор страницы" id="basic-nav-dropdown">
-                    <Link className="dropdown-item" to={"/"}>
-                      Главная
-                    </Link>
-                    <Link className="dropdown-item" to={"/listcar"}>
-                      Список машин
-                    </Link>
-                  </NavDropdown>
+                  {auth &&
+                    <NavDropdown className="text-white m-2" title="Выбор страницы" id="basic-nav-dropdown">
+                        <Link className="dropdown-item" to={"/"}>
+                          Главная
+                        </Link>
+                        <Link className="dropdown-item" to={"/listcar"}>
+                          Список машин
+                        </Link>
+                      </NavDropdown>
+                  }
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <h6 className="text-white">  Пользователь {user}</h6>
+                    <h6 className="text-white">{user}</h6>
                   <Nav className="ms-auto">
                     <Nav.Link href="#">Электронная сервисная книжка Мой Силант</Nav.Link>
                       {auth?(<Button onClick={localStorageСlear} className="m-2" variant="warning" type="submit">Выйти</Button>):(<Button  onClick={handleShow}  variant="warning">Авторизация</Button>)}
@@ -145,7 +149,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                       <Form.Label>Пароль</Form.Label>
                       <Form.Control onChange={(event) => setPassword(event.target.value)} type="password" placeholder="Введите пароль" />
                     </Form.Group>
-                      <Button onClick={onLogin}   variant="warning" type="submit">Войти</Button>
+                      <Button className={cls.Button} onClick={onLogin}   variant="warning" type="submit">Войти</Button>
                   </Form>
                 </Modal.Body>
           </Modal>
