@@ -1,4 +1,4 @@
-import {memo, ReactNode,} from 'react';
+import {memo, ReactNode, useEffect,} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import { Form, Button } from 'react-bootstrap';
 import cls from "./Filter.module.scss"
@@ -29,7 +29,7 @@ export const Filter = memo((props: FilterProps) => {
         try {
             let list_machine = await MainAPI.get_data(`service/api/machine_list/?`+
 
-            `${!!queryParameters.machine_model ? `factory_number=${queryParameters.machine_model}` :"factory_number="}` +
+            `${!!queryParameters.factory_number ? `factory_number=${queryParameters.factory_number}` :"factory_number="}` +
             `&machine_model=${!!queryParameters.machine_model ? queryParameters.machine_model :"Все модели"}`+
             `&engine_model=${!!queryParameters.engine_model ? queryParameters.engine_model :"Все модели"}`+
             `&transmission_model=${!!queryParameters.transmission_model ? queryParameters.transmission_model :"Все модели"}`+
@@ -45,7 +45,12 @@ export const Filter = memo((props: FilterProps) => {
             console.log(`Ошибка ${error}`)
         }}
 
-
+        useEffect(() => {
+        const event = {
+            preventDefault: () => {},
+        }
+            get_list_machine(event);
+        }, []);
 
     const {
         className,
