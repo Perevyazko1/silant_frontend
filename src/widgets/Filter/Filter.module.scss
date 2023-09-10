@@ -13,14 +13,30 @@
 .Form{
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
+    justify-content: center;
 }
 .Input{
     width: 340px;
     margin: 20px;
 }
-.Button{
-    margin: 10px;
+.ButtonContainer{
+    margin: 0 auto;
     width: 340px;
 
+}
+.Button{
+    margin: 0 auto;
+    display: list-item;
+}
+@media screen and (max-width: 885px) {
+    .Input{
+        width: 100%;
+        margin: 20px;
+}
+    .Filter{
+        justify-content: center;
+    }
+    .Form{
+        width: 80%;
+    }
 }

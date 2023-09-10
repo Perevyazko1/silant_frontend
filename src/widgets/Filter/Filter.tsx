@@ -138,13 +138,14 @@ export const Filter = memo((props: FilterProps) => {
 
                 </Form.Control>
               </Form.Group>
-                <div className={cls.Button}>
-                  <Button onClick={get_list_machine} className="m-3" variant="warning" type="submit">
-                        Найти
-                  </Button>
-                </div>
 
             </Form>
+            <div className={cls.ButtonContainer}>
+              <Button onClick={get_list_machine} className={cls.Button} variant="warning" type="submit">
+                    Найти
+              </Button>
+            </div>
+
             {children}
         </div>
     );
