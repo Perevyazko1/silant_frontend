@@ -44,7 +44,9 @@ const initialState: ListMachineState = {
             id:null,
             machine_model__name:"",
             transmission_model__name:""
-        }
+        },
+        users_data: {},
+        services_data: {}
 
 }
 }

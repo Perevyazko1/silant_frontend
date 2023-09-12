@@ -10,30 +10,30 @@ export interface CarInfoState {
 const initialState: CarInfoState = {
 
     car:{
-  "Cервисная компания": "",
-  "Адрес поставки (эксплуатации)": "",
-  "Грузополучатель (конечный потребитель)": "",
-  "Дата отгрузки с завода": "",
-  "Договор поставки №, дата": "",
-  "Зав. № ведущего моста": "",
-  "Зав. № двигателя": "",
-  "Зав. № машины": "",
-  "Зав. № трансмиссии": "",
-  "Зав. № управляемого моста": "",
-  "Клиент": "",
-  "Комплектация (доп. опции)": "",
-  "Модель ведущего моста": "",
-  "Модель двигателя": "",
-  "Модель машины": "",
-  "Модель трансмиссии": "",
-  "Модель управляемого моста": "",
+  "service_company": "",
+  "delivery_addressdelivery_address": "",
+  "consignee": "",
+  "date_of_shipmentdate_of_shipment": "",
+  "delivery_contract": "",
+  "driving_bridge_number": "",
+  "engine_number": "",
+  "factory_number": "",
+  "transmission_number": "",
+  "controlled_bridge_number": "",
+  "client": "",
+  "complete_set": "",
+  "driving_bridge_model": "",
+  "engine_model": "",
+  "machine_model": "",
+  "transmission_model": "",
+  "controlled_bridge_model": "",
 },
     isloading:false,
     numberCar: ""
 }
 
 export const carInfoSlice = createSlice({
-    name: 'carInfo',
+    name: 'infoCar',
     initialState,
     reducers: {
         infoCar(state, action: PayloadAction<Car>){
