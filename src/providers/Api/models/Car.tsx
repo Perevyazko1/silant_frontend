@@ -1,6 +1,6 @@
 export interface Car{
     "service_company": string,
-      "delivery_addressdelivery_address": string,
+      "delivery_address": string,
       "consignee": string,
       "date_of_shipmentdate_of_shipment": string,
       "delivery_contract": string,

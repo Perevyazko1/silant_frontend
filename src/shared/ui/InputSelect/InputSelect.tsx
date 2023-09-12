@@ -8,7 +8,7 @@ interface InputSelectProps {
     role: string
     listMachine: object
     car: string
-    name: string
+    header: string
 }
 
 
@@ -19,7 +19,7 @@ export const InputSelect = memo((props: InputSelectProps) => {
         role,
         listMachine,
         car,
-        name,
+        header,
         ...otherProps
 
     } = props
@@ -33,7 +33,7 @@ export const InputSelect = memo((props: InputSelectProps) => {
             className={classNames('', mods, [className])}
             {...otherProps}
         >
-                    <td>{name}</td>
+                    <td>{header}</td>
                     <td>
                         <Form.Control disabled={role !== 'manager'} as="select">
                             {

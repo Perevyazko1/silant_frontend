@@ -7,6 +7,7 @@ import MainAPI from "../../providers/Api/axios";
 import {listMachineSlice} from "../../providers/Api/slice/ListMachineSlice";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {InputSelect} from "../../shared/ui/InputSelect/InputSelect";
+import {InputArea} from "../../shared/ui/InputArea/InputArea";
 
 interface TableProps {
     className?: string
@@ -54,6 +55,11 @@ export const TableSearch = memo((props: TableProps) => {
                     console.log(`Ошибка ${error}`)
         }}
 
+        const handleSave = () => {
+
+            console.log(car)
+
+        }
         useEffect(() => {
         const event = {
             preventDefault: () => {},
@@ -61,9 +67,6 @@ export const TableSearch = memo((props: TableProps) => {
             get_input_fields(event);
         }, []);
 
-        useEffect(()=>{
-            console.log(listMachine)
-        },[car])
 
 
     const {
@@ -97,220 +100,23 @@ export const TableSearch = memo((props: TableProps) => {
                     </thead>
                     {isCar &&
                         <tbody>
-                        <tr>
-                            <td>Зав. № машины</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={inputCar}
-                                    disabled={role !== 'manager'}
-                                    onChange={event =>{
-                                        dispatch(infoCar({ ...car, factory_number: inputCar }));
-                                        setInputCar(event.target.value)}
-                                }
-                                />
-                            </td>
-                        </tr>
-                        {/*<tr>*/}
-                        {/*    <td>Модель машины</td>*/}
-                        {/*    <td>*/}
-                        {/*        <Form.Control disabled={role !== 'manager'} as="select">*/}
-                        {/*            {*/}
-                        {/*              Object.values(listMachine.filter_data.machine_models).map((model) => (*/}
-                        {/*                <option  value={car.machine_model} key={model['name']}>{model['name']}</option>*/}
-                        {/*            ))}*/}
-                        {/*        </Form.Control>*/}
-                        {/*    </td>*/}
-                        {/*</tr>*/}
-                        <InputSelect  role={role} listMachine={listMachine.filter_data.machine_models} car={car.machine_model} name={"Модель машины"}/>
-                        <tr>
-                            <td>Модель двигателя</td>
-                            <td>
-                                <Form.Control disabled={role !== 'manager'} as="select">
-                                    {
-                                      Object.values(listMachine.filter_data.engine_models).map((model) => (
-                                        <option  value={car.engine_model} key={model['name']}>{model['name']}</option>
-                                    ))}
-                                </Form.Control>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Зав. № двигателя</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.engine_number}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Модель трансмиссии</td>
-                            <td>
-                                <Form.Control disabled={role !== 'manager'} as="select">
-                                    {
-                                      Object.values(listMachine.filter_data.transmission_models).map((model) => (
-                                        <option  value={car.transmission_model} key={model['name']}>{model['name']}</option>
-                                    ))}
-                                </Form.Control>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Зав. № трансмиссии</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.transmission_number}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Модель ведущего моста</td>
-                            <td>
-                                <Form.Control disabled={role !== 'manager'} as="select">
-                                    {
-                                      Object.values(listMachine.filter_data.driving_bridge_models).map((model) => (
-                                        <option  value={car.driving_bridge_model} key={model['name']}>{model['name']}</option>
-                                    ))}
-                                </Form.Control>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Зав. № ведущего моста</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.driving_bridge_number}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Модель управляемого моста</td>
-                            <td>
-                                <Form.Control disabled={role !== 'manager'} as="select">
-                                    {
-                                      Object.values(listMachine.filter_data.controlled_bridge_models).map((model) => (
-                                        <option  value={car.controlled_bridge_model} key={model['name']}>{model['name']}</option>
-                                    ))}
-                                </Form.Control>
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Зав. № управляемого моста</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.controlled_bridge_number}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Договор поставки №, дата</td>
-                            <td>
-                                {car.delivery_contract}
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.delivery_contract}
-                                    disabled={role !== 'manager'}
-                                />
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Дата отгрузки с завода</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.date_of_shipmentdate_of_shipment}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Грузополучатель (конечный потребитель)</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.consignee}
-                                    disabled={role !== 'manager'}
-                                />
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Адрес поставки (эксплуатации)</td>
-                            <td>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.delivery_addressdelivery_address}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Комплектация (доп. опции)</td>
-                            <td>
-                                {car.complete_set}
-                                <Form.Control
-                                    as="textarea"
-                                    rows={1}
-                                    value={car.delivery_addressdelivery_address}
-                                    disabled={role !== 'manager'}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Клиент</td>
-                            <td>
-                                <Form.Control disabled={role !== 'manager'} as="select">
-                                    {
-                                      Object.values(listMachine.users_data).map((model) => (
-                                        <option  value={car.client} key={model['first_name']}>{model['first_name']}</option>
-                                    ))}
-                                </Form.Control>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Cервисная компания</td>
-                            <td>
-                                <Form.Control disabled={role !== 'manager'} as="select">
-                                    {
-                                      Object.values(listMachine.services_data).map((model) => (
-                                        <option  value={car.service_company} key={model['first_name']}>{model['first_name']}</option>
-                                    ))}
-                                </Form.Control>
-
-                            </td>
-                        </tr>
-
-
-                        {/*{car && Object.entries(car).map((key, value) =>*/}
-                        {/*    <tr key={key[0]}>*/}
-                        {/*        <td width='35%'>{key[0]}</td>*/}
-                        {/*        <td>*/}
-                        {/*            <Form.Control*/}
-                        {/*                as="textarea"*/}
-                        {/*                rows={1}*/}
-                        {/*                value={car.client}*/}
-                        {/*                disabled={role !== 'manager'}*/}
-                        {/*            />*/}
-                        {/*        </td>*/}
-                        {/*    </tr>*/}
-                        {/*)}*/}
+                        <InputArea header={"Зав. № машины"} valueDispatch={"factory_number"} role={role} valueInput={car.factory_number}/>
+                        <InputSelect  role={role} listMachine={listMachine.filter_data.machine_models} car={car.machine_model} header={"Модель машины"}/>
+                        <InputSelect  role={role} listMachine={listMachine.filter_data.engine_models} car={car.engine_model} header={"Модель двигателя"}/>
+                        <InputArea role={role} valueInput={car.engine_number} valueDispatch={"engine_number"} header={"Зав. № двигателя"}/>
+                        <InputSelect role={role} listMachine={listMachine.filter_data.transmission_models} car={car.transmission_model} header={"Модель трансмиссии"}/>
+                        <InputArea header={"Зав. № трансмиссии"} valueDispatch={"transmission_number"} role={role} valueInput={car.transmission_number}/>
+                        <InputSelect role={role} listMachine={listMachine.filter_data.driving_bridge_models} car={car.driving_bridge_model} header={"Модель ведущего моста"}/>
+                        <InputArea role={role} valueInput={car.driving_bridge_number} valueDispatch={"driving_bridge_number"} header={"Зав. № ведущего моста"}/>
+                        <InputSelect role={role} listMachine={listMachine.filter_data.controlled_bridge_models} car={car.controlled_bridge_model} header={"Модель управляемого моста"}/>
+                        <InputArea role={role} valueInput={car.controlled_bridge_number} valueDispatch={"controlled_bridge_number"} header={"Зав. № управляемого моста"}/>
+                        <InputArea role={role} valueInput={car.delivery_contract} valueDispatch={"delivery_contract"} header={"Договор поставки №, дата"}/>
+                        <InputArea role={role} valueInput={car.date_of_shipmentdate_of_shipment} valueDispatch={"date_of_shipmentdate_of_shipment"} header={"Дата отгрузки с завода"}/>
+                        <InputArea role={role} valueInput={car.consignee} valueDispatch={"consignee"} header={"Грузополучатель (конечный потребитель)"}/>
+                        <InputArea role={role} valueInput={car.delivery_address} valueDispatch={"delivery_address"} header={"Адрес поставки (эксплуатации)"}/>
+                        <InputArea role={role} valueInput={car.complete_set} valueDispatch={"delivery_addressdelivery_address"} header={"Комплектация (доп. опции)"}/>
+                        <InputSelect role={role} listMachine={listMachine.users_data} car={car.client} header={"Клиент"}/>
+                        <InputSelect role={role} listMachine={listMachine.services_data} car={car.service_company} header={"Cервисная компания"}/>
                         </tbody>
                     }
                     {isComplaints &&
@@ -365,6 +171,7 @@ export const TableSearch = memo((props: TableProps) => {
                     }
 
                 </Table>
+            <Button onClick={handleSave}>Сохранить</Button>
 
             {children}
         </div>

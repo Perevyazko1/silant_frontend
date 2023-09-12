@@ -11,7 +11,7 @@ const initialState: CarInfoState = {
 
     car:{
   "service_company": "",
-  "delivery_addressdelivery_address": "",
+  "delivery_address": "",
   "consignee": "",
   "date_of_shipmentdate_of_shipment": "",
   "delivery_contract": "",
