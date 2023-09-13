@@ -22,6 +22,7 @@ export const TableSearch = memo((props: TableProps) => {
 
     const dispatch = useAppdispatch()
     const {infoCar} = carInfoSlice.actions
+    const {resetCar} = carInfoSlice.actions
     const {car} = useAppSelector(state => state.carInfo)
     const {ListMachineSlice} = listMachineSlice.actions
     const {listMachine} =useAppSelector(state => state.listMachine)
@@ -34,6 +35,7 @@ export const TableSearch = memo((props: TableProps) => {
     const [isCar,setIsCar]=useState<boolean>(true)
     const [isComplaints, setIsComplaints]=useState<boolean>()
     const [isMaintenance,setIsMaintenance]=useState<boolean>()
+    const [updateRole, setUpdateRole] = useState("client")
     const [inputCar, setInputCar] =useState<string>(car.factory_number)
 
         async function save_machine() {
@@ -63,11 +65,6 @@ export const TableSearch = memo((props: TableProps) => {
                     console.log(`Ошибка ${error}`)
         }}
 
-        const handleSave = () => {
-
-            console.log(car)
-
-        }
         useEffect(() => {
         const event = {
             preventDefault: () => {},
@@ -108,7 +105,7 @@ export const TableSearch = memo((props: TableProps) => {
                     </thead>
                     {isCar &&
                         <tbody>
-                        <InputArea header={"Зав. № машины"} valueDispatch={"factory_number"} role={role} valueInput={car.factory_number}/>
+                        <InputArea header={"Зав. № машины"} valueDispatch={"factory_number"} role={updateRole} valueInput={car.factory_number}/>
                         <InputSelect valueDispatch={"machine_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.machine_models} valueInput={car.machine_model} header={"Модель машины"}/>
                         <InputSelect valueDispatch={"engine_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.engine_models} valueInput={car.engine_model} header={"Модель двигателя"}/>
                         <InputArea role={role} valueInput={car.engine_number} valueDispatch={"engine_number"} header={"Зав. № двигателя"}/>
@@ -118,8 +115,8 @@ export const TableSearch = memo((props: TableProps) => {
                         <InputArea role={role} valueInput={car.driving_bridge_number} valueDispatch={"driving_bridge_number"} header={"Зав. № ведущего моста"}/>
                         <InputSelect valueDispatch={"controlled_bridge_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.controlled_bridge_models} valueInput={car.controlled_bridge_model} header={"Модель управляемого моста"}/>
                         <InputArea role={role} valueInput={car.controlled_bridge_number} valueDispatch={"controlled_bridge_number"} header={"Зав. № управляемого моста"}/>
-                        <InputArea role={role} valueInput={car.delivery_contract} valueDispatch={"delivery_contract"} header={"Договор поставки №, дата"}/>
-                        <InputArea role={role} valueInput={car.date_of_shipment} valueDispatch={"date_of_shipment"} header={"Дата отгрузки с завода"}/>
+                        <InputArea role={role} valueInput={car.delivery_contract} valueDispatch={"delivery_contract"} header={"Договор поставки №, дата"} type={"date"}/>
+                        <InputArea role={role} valueInput={car.date_of_shipment} valueDispatch={"date_of_shipment"} header={"Дата отгрузки с завода"} type={"date"}/>
                         <InputArea role={role} valueInput={car.consignee} valueDispatch={"consignee"} header={"Грузополучатель (конечный потребитель)"}/>
                         <InputArea role={role} valueInput={car.delivery_address} valueDispatch={"delivery_address"} header={"Адрес поставки (эксплуатации)"}/>
                         <InputArea role={role} valueInput={car.complete_set} valueDispatch={"complete_set"} header={"Комплектация (доп. опции)"}/>
@@ -180,6 +177,10 @@ export const TableSearch = memo((props: TableProps) => {
 
                 </Table>
             <Button onClick={save_machine}>Сохранить</Button>
+            <Button onClick={()=>{
+                dispatch(resetCar())
+                setUpdateRole(role)
+            }}>Создать новую машину</Button>
 
             {children}
         </div>

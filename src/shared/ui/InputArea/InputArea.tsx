@@ -9,6 +9,7 @@ interface InputAreaProps {
     children?: ReactNode
     // onChange: () => event
     role: string
+    type?:string
     valueInput: string
     valueDispatch: string
     header: string
@@ -24,6 +25,7 @@ export const InputArea = memo((props: InputAreaProps) => {
         children,
         // onChange,
         role,
+        type,
         valueDispatch,
         valueInput,
         header,
@@ -51,6 +53,7 @@ export const InputArea = memo((props: InputAreaProps) => {
                     rows={1}
                     value={valueInput}
                     disabled={role !== 'manager'}
+                    type={type}
                     onChange={event =>{
                         dispatch(infoCar({ ...car, [valueDispatch]: event.target.value }));
                     }

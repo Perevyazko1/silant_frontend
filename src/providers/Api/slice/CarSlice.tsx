@@ -46,6 +46,9 @@ export const carInfoSlice = createSlice({
         isLoadingCar(state, action: PayloadAction<boolean>){
             state.isloading = action.payload
         },
+        resetCar(state) {
+            state.car = initialState.car;
+        },
 
     }
 })
