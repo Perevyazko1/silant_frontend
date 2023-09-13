@@ -37,7 +37,6 @@ export const InputArea = memo((props: InputAreaProps) => {
     const dispatch = useAppdispatch()
     const {infoCar} = carInfoSlice.actions
     const {car} = useAppSelector(state => state.carInfo)
-    const [inputCar, setInputCar] =useState<string>(valueInput)
 
 
     return (

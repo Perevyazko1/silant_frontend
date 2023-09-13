@@ -13,7 +13,7 @@ const initialState: CarInfoState = {
   "service_company": "",
   "delivery_address": "",
   "consignee": "",
-  "date_of_shipmentdate_of_shipment": "",
+  "date_of_shipment": "",
   "delivery_contract": "",
   "driving_bridge_number": "",
   "engine_number": "",
