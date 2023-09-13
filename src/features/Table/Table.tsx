@@ -36,6 +36,14 @@ export const TableSearch = memo((props: TableProps) => {
     const [isMaintenance,setIsMaintenance]=useState<boolean>()
     const [inputCar, setInputCar] =useState<string>(car.factory_number)
 
+        async function save_machine() {
+        let result = await MainAPI.post_data(`service/api/update_machine/`, car)
+            console.log(result)
+            alert(result.result)
+
+    }
+
+
 
             const get_input_fields = async (event: { preventDefault: () => void; }) => {
                 event.preventDefault();
@@ -171,7 +179,7 @@ export const TableSearch = memo((props: TableProps) => {
                     }
 
                 </Table>
-            <Button onClick={handleSave}>Сохранить</Button>
+            <Button onClick={save_machine}>Сохранить</Button>
 
             {children}
         </div>
