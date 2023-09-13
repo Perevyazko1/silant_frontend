@@ -62,6 +62,7 @@ export const InputSelect = memo((props: InputSelectProps) => {
 
                                 >{model[keyInput]}</option>
                             ))}
+                            <option disabled={true}>Данные доступны для владельцев техники</option>
                         </Form.Control>
                     </td>
         </tr>

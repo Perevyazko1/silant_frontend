@@ -18,6 +18,7 @@ export const FormSearch = memo((props: FormProps) => {
 
     const dispatch = useAppdispatch()
     const {infoCar} = carInfoSlice.actions
+    const {resetCar} = carInfoSlice.actions
     const {numberCar} = useAppSelector(state => state.carInfo)
     const {isLoadingCar} = carInfoSlice.actions
     const {MaintenanceInfo} = maintenanceInfoSlice.actions
@@ -32,6 +33,7 @@ export const FormSearch = memo((props: FormProps) => {
         event.preventDefault();
 
         try {
+            dispatch(resetCar())
             let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${number_car}`)
             let maintenance = await MainAPI.get_data(`service/api/maintenance/?factory_number=${number_car}`)
             let complaints = await MainAPI.get_data(`service/api/complaints/?factory_number=${number_car}`)
