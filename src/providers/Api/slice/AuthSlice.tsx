@@ -19,7 +19,7 @@ const initialState: AuthPageState = {
     first_name:"",
     last_name:"",
     token:"",
-    role:"",
+    role:"anonymous",
     authenticated:false,
     pageIsLoading: false,
     error: "Неверный логин или пароль"
@@ -47,6 +47,10 @@ export const authPageSlice = createSlice({
         isError(state, action: PayloadAction<string>){
             state.role = action.payload
         },
+        resetAuth(state) {
+            state.role = initialState.role;
+        },
+
     }
 })
 

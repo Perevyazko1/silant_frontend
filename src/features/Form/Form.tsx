@@ -24,7 +24,7 @@ export const FormSearch = memo((props: FormProps) => {
     const {ComplaintsInfo} = complaintsInfoSlice.actions
 
 
-    const [number_car,setNumber_car]=useState(numberCar)
+    const [number_car,setNumber_car]=useState<string>()
 
 
 
@@ -40,7 +40,7 @@ export const FormSearch = memo((props: FormProps) => {
             dispatch(ComplaintsInfo(complaints))
             dispatch((isLoadingCar(true)))
             if (!machine){
-                alert("Такого номера не существует")
+                alert("Такого номера не существует или данная машина вам не доступна")
             }
 
         }

@@ -15,8 +15,7 @@ interface MainPageProps {
 
 const MainPage = memo((props: MainPageProps) => {
 
-    const {isloading}=useAppSelector(state=>state.carInfo)
-    console.log(`проверка${isloading}`)
+    const {car} = useAppSelector(state => state.carInfo)
     const {
         className,
         children,
@@ -37,7 +36,7 @@ const MainPage = memo((props: MainPageProps) => {
                 {...otherProps}
             >
                 <FormSearch/>
-                {isloading && <TableSearch/>}
+                {car?.factory_number && <TableSearch/>}
                 <Carusel/>
             </div>
         </PageWrapper>

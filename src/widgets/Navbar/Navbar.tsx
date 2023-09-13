@@ -23,6 +23,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
       const dispatch = useAppdispatch()
       const {isRole} = authPageSlice.actions
       const {isUsername} = authPageSlice.actions
+      const {resetAuth} = authPageSlice.actions
       const {username} = useAppSelector(state=>state.authReducer)
 
 
@@ -38,6 +39,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
       const localStorageСlear = () => {
           setAuth(false)
           setUser("")
+          dispatch(resetAuth())
           localStorage.setItem("token","22548518cfa3d41af718c4b4a34aae335c89b606")
         }
 

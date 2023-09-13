@@ -92,8 +92,12 @@ export const TableSearch = memo((props: TableProps) => {
           <h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>
           <div className={cls.ContainerButton}>
             <Button onClick={()=>{setIsCar(true); setIsMaintenance(false); setIsComplaints(false)}} className={cls.Button} variant="warning">Общая инфо</Button>
-            <Button onClick={()=>{setIsCar(false); setIsMaintenance(true); setIsComplaints(false)}} className={cls.Button} variant="warning">ТО</Button>
-            <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>
+              {role!=="anonymous" &&
+                    <Button onClick={()=>{setIsCar(false); setIsMaintenance(true); setIsComplaints(false)}} className={cls.Button} variant="warning">ТО</Button>
+              }
+              {role!=="anonymous" &&
+                    <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>
+              }
           </div>
 
                 <Table striped bordered hover responsive>
@@ -176,12 +180,15 @@ export const TableSearch = memo((props: TableProps) => {
                     }
 
                 </Table>
-            <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
-            <Button className={"m-2"} onClick={()=>{
+            {role=="manager" &&
+                <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+            }
+            {role=="manager" &&
+                <Button className={"m-2"} onClick={()=>{
                 dispatch(resetCar())
                 setUpdateRole(role)
-            }}>Создать новую машину</Button>
-
+                }}>Создать новую машину</Button>
+            }
             {children}
         </div>
     );
