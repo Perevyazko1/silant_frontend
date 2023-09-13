@@ -176,8 +176,8 @@ export const TableSearch = memo((props: TableProps) => {
                     }
 
                 </Table>
-            <Button onClick={save_machine}>Сохранить</Button>
-            <Button onClick={()=>{
+            <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+            <Button className={"m-2"} onClick={()=>{
                 dispatch(resetCar())
                 setUpdateRole(role)
             }}>Создать новую машину</Button>
