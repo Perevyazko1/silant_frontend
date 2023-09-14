@@ -8,6 +8,7 @@ import {listMachineSlice} from "../../providers/Api/slice/ListMachineSlice";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {InputSelect} from "../../shared/ui/InputSelect/InputSelect";
 import {InputArea} from "../../shared/ui/InputArea/InputArea";
+import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
 
 interface TableProps {
     className?: string
@@ -25,6 +26,7 @@ export const TableSearch = memo((props: TableProps) => {
     const {resetCar} = carInfoSlice.actions
     const {car} = useAppSelector(state => state.carInfo)
     const {ListMachineSlice} = listMachineSlice.actions
+    const {isRole} = authPageSlice.actions
     const {listMachine} =useAppSelector(state => state.listMachine)
 
 
@@ -64,7 +66,10 @@ export const TableSearch = memo((props: TableProps) => {
                  catch (error) {
                     console.log(`Ошибка ${error}`)
         }}
-
+        useEffect(() => {
+            const roleUser = localStorage.getItem("role_user");
+            if (roleUser !== null && roleUser !== "anonymous" && roleUser !== "") { dispatch(isRole(roleUser));
+            } }, []);
         useEffect(() => {
         const event = {
             preventDefault: () => {},

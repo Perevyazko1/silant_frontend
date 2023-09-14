@@ -10,6 +10,7 @@ import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
 import {useDispatch} from "react-redux";
+import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 
 
 interface NavbarProps {
@@ -24,6 +25,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
       const {isRole} = authPageSlice.actions
       const {isFirst_name} = authPageSlice.actions
       const {resetAuth} = authPageSlice.actions
+      const {resetCar} = carInfoSlice.actions
       const {first_name} = useAppSelector(state=>state.authReducer)
         console.log(`имя ${first_name}`)
 
@@ -35,16 +37,28 @@ export const NavbarComponent = memo((props: NavbarProps) => {
       const [show, setShow] = useState(false);
 
       const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
+      const handleShow = () => {
+          setShow(true);
+          dispatch(resetCar())
+      }
       const localStorageСlear = () => {
           setAuth(false)
           setUser_name("")
+          localStorage.setItem("first_name_user","")
           dispatch(resetAuth())
+          dispatch(resetCar())
           localStorage.setItem("token","22548518cfa3d41af718c4b4a34aae335c89b606")
+          localStorage.setItem("role_user", "anonymous")
         }
 
       const [login, setLogin] = useState("")
       const [password, setPassword] = useState("")
+      useEffect(()=>{
+          if (user_name !== ""){
+              setAuth(true)
+          }
+
+      })
 
 
 
@@ -75,6 +89,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                    handleClose()
                    localStorage.setItem("token",data.token)
                     localStorage.setItem("first_name_user", data.first_name)
+                    localStorage.setItem("role_user", data.role)
 
                 }
 
