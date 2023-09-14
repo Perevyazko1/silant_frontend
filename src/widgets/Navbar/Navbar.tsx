@@ -22,23 +22,23 @@ export const NavbarComponent = memo((props: NavbarProps) => {
 
       const dispatch = useAppdispatch()
       const {isRole} = authPageSlice.actions
-      const {isUsername} = authPageSlice.actions
+      const {isFirst_name} = authPageSlice.actions
       const {resetAuth} = authPageSlice.actions
-      const {username} = useAppSelector(state=>state.authReducer)
-
+      const {first_name} = useAppSelector(state=>state.authReducer)
+        console.log(`имя ${first_name}`)
 
       const {isAuthenticated} = authPageSlice.actions
       const {authenticated} =useAppSelector(state=>state.authReducer)
 
       const [auth, setAuth] = useState(authenticated)
-      const [user, setUser] = useState(username)
+      const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
       const [show, setShow] = useState(false);
 
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
       const localStorageСlear = () => {
           setAuth(false)
-          setUser("")
+          setUser_name("")
           dispatch(resetAuth())
           localStorage.setItem("token","22548518cfa3d41af718c4b4a34aae335c89b606")
         }
@@ -69,18 +69,19 @@ export const NavbarComponent = memo((props: NavbarProps) => {
         useEffect(()=>{
             if(data){
                 dispatch(isAuthenticated(data.authenticated))
-                dispatch(isUsername(data.username))
+                dispatch(isFirst_name(data.first_name))
                 dispatch((isRole(data.role)))
                 if (data.authenticated){
                    handleClose()
                    localStorage.setItem("token",data.token)
+                    localStorage.setItem("first_name_user", data.first_name)
 
                 }
 
                 else {
                     alert("Неверный логин или пароль")
                 }
-                setUser(data.username)
+                setUser_name(localStorage.getItem("first_name_user"))
                 setAuth(data.authenticated)
 
             }
@@ -126,7 +127,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                   }
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <h6 className="text-white">{user}</h6>
+                    <h6 className="text-white">{user_name}</h6>
                   <Nav className="ms-auto">
                     <Nav.Link href="#">Электронная сервисная книжка Мой Силант</Nav.Link>
                       {auth?(<Button onClick={localStorageСlear} className="m-2" variant="warning" type="submit">Выйти</Button>):(<Button  onClick={handleShow}  variant="warning">Авторизация</Button>)}
