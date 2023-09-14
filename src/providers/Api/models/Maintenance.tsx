@@ -1,10 +1,14 @@
 export interface Maintenance{
-        "id": null|number
-        "Вид ТО": null|string
-        "Дата заказ-наряда": null|string
-        "Дата проведения": null|string
-        "Машина": null|string
-        "Наработка, м/час": null|number
-        "№ заказ-наряда":null|string
+        "id": number
+        "type_of_maintenance": string
+        "date_of_maintenance": string
+        "operating_time": string
+        "order_number": string
+        "order_date": string
+        "machine":string
+        "select_data":{
+            "machine": object
+            "type_maintenance" :object
+}
 
 }

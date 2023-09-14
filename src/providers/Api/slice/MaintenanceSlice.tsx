@@ -8,13 +8,17 @@ export interface MaintenanceInfoState {
 const initialState: MaintenanceInfoState = {
 
     maintenance:{
-        "id": null,
-        "Вид ТО": null,
-        "Дата заказ-наряда": null,
-        "Дата проведения": null,
-        "Машина": null,
-        "Наработка, м/час": null,
-        "№ заказ-наряда":null
+        "id": 0,
+        "type_of_maintenance": "",
+        "date_of_maintenance": "",
+        "operating_time": "",
+        "order_number": "",
+        "order_date": "",
+        "machine":"",
+        "select_data":{
+            "machine": {},
+            "type_maintenance" : {}
+        }
 }
 }
 

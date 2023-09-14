@@ -9,6 +9,7 @@ import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {InputSelect} from "../../shared/ui/InputSelect/InputSelect";
 import {InputArea} from "../../shared/ui/InputArea/InputArea";
 import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
+import maintenanceInfo from "../../providers/Api/slice/MaintenanceSlice";
 
 interface TableProps {
     className?: string
@@ -160,41 +161,57 @@ export const TableSearch = memo((props: TableProps) => {
                     }
                     {isMaintenance &&
                         <tbody>
-                        {maintenance && Object.entries(maintenance).map((key, value) =>
-                            <tr key={key[0]}>
-                                <td width='35%'>{key[0]}</td>
-                                <td>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows={1}
-                                        value={key[1]}
-                                        disabled={role !== 'manager'}
-                                        // onChange={
-                                        //     (e) => dispatch({
-                                        //         type: "UPDATE_MACHINE_INFO",
-                                        //         key: key[0],
-                                        //         value: e.target.value
-                                        //     })
-                                        // }
-                                    />
-                                </td>
-                            </tr>
-                        )}
+                            <InputSelect role={role} listMachine={maintenance.select_data.type_maintenance} valueInput={maintenance.type_of_maintenance} header={"Вид ТО"} keyInput={"name"} valueDispatch={"type_of_maintenance"}/>
+                            <InputArea role={role} valueInput={maintenance.operating_time} valueDispatch={"operating_time"} header={"Наработка, м/час"}/>
+                            <InputArea role={role} valueInput={maintenance.date_of_maintenance} valueDispatch={"date_of_maintenance"} header={"Дата проведения"}/>
+                            <InputArea role={role} valueInput={maintenance.order_number} valueDispatch={"order_number"} header={"№ заказ-наряда"}/>
+                            <InputArea role={role} valueInput={maintenance.order_date} valueDispatch={"order_date"} header={"Дата заказ-наряда"}/>
+                            <InputSelect role={role} listMachine={maintenance.select_data.machine} valueInput={maintenance.machine} header={"Машина"} keyInput={"factory_number"} valueDispatch={"machine"}/>
                         </tbody>
 
                     }
 
                 </Table>
-            {role=="manager" &&
-                <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+            {isCar &&
+                <div>
+                    {role == "manager" &&
+                        <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+                    }
+                    {role == "manager" &&
+                        <Button className={"m-2"} onClick={() => {
+                            dispatch(resetCar())
+                            setUpdateRole(role)
+                        }}>Создать новую машину</Button>
+                    }
+                </div>
             }
-            {role=="manager" &&
-                <Button className={"m-2"} onClick={()=>{
-                dispatch(resetCar())
-                setUpdateRole(role)
-                }}>Создать новую машину</Button>
+            {isMaintenance &&
+                <div>
+                    {role == "manager" &&
+                        <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+                    }
+                    {role == "manager" &&
+                        <Button className={"m-2"} onClick={() => {
+                            dispatch(resetCar())
+                            setUpdateRole(role)
+                        }}>Добавать ТО</Button>
+                    }
+                </div>
             }
-            {children}
+            {isComplaints &&
+                <div>
+                    {role == "manager" &&
+                        <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+                    }
+                    {role == "manager" &&
+                        <Button className={"m-2"} onClick={() => {
+                            dispatch(resetCar())
+                            setUpdateRole(role)
+                        }}>Добавать Рекламацию</Button>
+                    }
+                    {children}
+                </div>
+            }
         </div>
     );
 });
