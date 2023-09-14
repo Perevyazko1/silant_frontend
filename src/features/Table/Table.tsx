@@ -145,26 +145,6 @@ export const TableSearch = memo((props: TableProps) => {
                             <InputArea role={role} valueInput={complaints.date_of_restoration} valueDispatch={"date_of_restoration"} header={'Дата восстановления'}/>
                             <InputArea role={role} valueInput={complaints.get_equipment_downtimeget_equipment_downtime} valueDispatch={"get_equipment_downtimeget_equipment_downtime"} header={'Время простоя техники'}/>
                             <InputSelect role={role} listMachine={complaints.select_data.machine} valueInput={complaints.machine} header={'Машина'} keyInput={'factory_number'} valueDispatch={"machinecomplaints.select_data."}/>
-                        {/*{complaints && Object.entries(complaints).map((key, value) =>*/}
-                        {/*    <tr key={key[0]}>*/}
-                        {/*        <td width='35%'>{key[0]}</td>*/}
-                        {/*        <td>*/}
-                        {/*            <Form.Control*/}
-                        {/*                as="textarea"*/}
-                        {/*                rows={1}*/}
-                        {/*                value={key[1]}*/}
-                        {/*                disabled={role !== 'manager'}*/}
-                        {/*                // onChange={*/}
-                        {/*                //     (e) => dispatch({*/}
-                        {/*                //         type: "UPDATE_MACHINE_INFO",*/}
-                        {/*                //         key: key[0],*/}
-                        {/*                //         value: e.target.value*/}
-                        {/*                //     })*/}
-                        {/*                // }*/}
-                        {/*            />*/}
-                        {/*        </td>*/}
-                        {/*    </tr>*/}
-                        {/*)}*/}
                         </tbody>
 
                     }
