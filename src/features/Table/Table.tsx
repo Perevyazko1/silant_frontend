@@ -1,6 +1,6 @@
 import {memo, ReactNode, useEffect, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
-import {Button, Table,Form} from 'react-bootstrap';
+import {Button, Table, Form, InputGroup} from 'react-bootstrap';
 import cls from "./Table.module.scss"
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import MainAPI from "../../providers/Api/axios";
@@ -136,26 +136,35 @@ export const TableSearch = memo((props: TableProps) => {
                     }
                     {isComplaints &&
                         <tbody>
-                        {complaints && Object.entries(complaints).map((key, value) =>
-                            <tr key={key[0]}>
-                                <td width='35%'>{key[0]}</td>
-                                <td>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows={1}
-                                        value={key[1]}
-                                        disabled={role !== 'manager'}
-                                        // onChange={
-                                        //     (e) => dispatch({
-                                        //         type: "UPDATE_MACHINE_INFO",
-                                        //         key: key[0],
-                                        //         value: e.target.value
-                                        //     })
-                                        // }
-                                    />
-                                </td>
-                            </tr>
-                        )}
+                            <InputArea role={role} valueInput={complaints.date_of_refusal} valueDispatch={"date_of_refusal"} header={'Дата отказа'}/>
+                            <InputArea role={role} valueInput={complaints.operating_time} valueDispatch={"operating_time"} header={'Наработка, м/час'}/>
+                            <InputSelect role={role} listMachine={complaints.select_data.failure_node} valueInput={complaints.failure_node} header={'Узел отказа'} keyInput={'name'} valueDispatch={"failure_node"}/>
+                            <InputArea role={role} valueInput={complaints.failure_description} valueDispatch={"failure_description"} header={'Описание отказа'}/>
+                            <InputSelect role={role} listMachine={complaints.select_data.recovery_method} valueInput={complaints.recovery_method} header={'Способ восстановления'} keyInput={'name'} valueDispatch={"recovery_method"}/>
+                            <InputArea role={role} valueInput={complaints.parts_used} valueDispatch={"parts_used"} header={'Используемые запасные части'}/>
+                            <InputArea role={role} valueInput={complaints.date_of_restoration} valueDispatch={"date_of_restoration"} header={'Дата восстановления'}/>
+                            <InputArea role={role} valueInput={complaints.get_equipment_downtimeget_equipment_downtime} valueDispatch={"get_equipment_downtimeget_equipment_downtime"} header={'Время простоя техники'}/>
+                            <InputSelect role={role} listMachine={complaints.select_data.machine} valueInput={complaints.machine} header={'Машина'} keyInput={'factory_number'} valueDispatch={"machinecomplaints.select_data."}/>
+                        {/*{complaints && Object.entries(complaints).map((key, value) =>*/}
+                        {/*    <tr key={key[0]}>*/}
+                        {/*        <td width='35%'>{key[0]}</td>*/}
+                        {/*        <td>*/}
+                        {/*            <Form.Control*/}
+                        {/*                as="textarea"*/}
+                        {/*                rows={1}*/}
+                        {/*                value={key[1]}*/}
+                        {/*                disabled={role !== 'manager'}*/}
+                        {/*                // onChange={*/}
+                        {/*                //     (e) => dispatch({*/}
+                        {/*                //         type: "UPDATE_MACHINE_INFO",*/}
+                        {/*                //         key: key[0],*/}
+                        {/*                //         value: e.target.value*/}
+                        {/*                //     })*/}
+                        {/*                // }*/}
+                        {/*            />*/}
+                        {/*        </td>*/}
+                        {/*    </tr>*/}
+                        {/*)}*/}
                         </tbody>
 
                     }

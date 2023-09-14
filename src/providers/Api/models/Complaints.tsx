@@ -1,13 +1,19 @@
 export interface Complaints{
 
-    id: null|number
-    "Время простоя техники": null|number
-    "Дата восстановления": null|string
-    "Дата отказа": null|string
-    "Используемые запасные части": null|string
-    "Машина": null|string
-    "Наработка, м/час": null|number
-    "Описание отказа": null|string
-    "Способ восстановления": null|string
-    "Узел отказа": null|string
+    id: string
+    "date_of_refusal": string
+    "operating_time": string
+    "failure_node": string
+    "failure_description": string
+    "recovery_method": string
+    "parts_used": string
+    "date_of_restoration": string
+    "get_equipment_downtimeget_equipment_downtime": string
+    "machine": string
+    'select_data': {
+            'machine': object
+            'failure_node': object
+            'recovery_method': object
+        }
+
 }
