@@ -1,7 +1,7 @@
-import {memo, ReactNode, useState, useEffect} from 'react';
+import {memo, ReactNode, useEffect, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import Container from 'react-bootstrap/Container';
-import {Navbar,Button, Modal, Form, Nav, NavDropdown} from 'react-bootstrap';
+import {Button, Form, Modal, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import cls from "./Navbar.module.scss"
 import brand from "../../app/style/icons/Logotype accent RGB 2.jpg"
@@ -9,7 +9,6 @@ import {postApi} from "../../providers/Api/RtkService";
 import {User} from "../../providers/Api/models/User";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
-import {useDispatch} from "react-redux";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 
 

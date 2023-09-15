@@ -16,7 +16,6 @@ export const useQueryParams = () => {
             initialParams[entry[0]] = entry[1];
         }
 
-        // После инициализации переключить initialLoad на false
         setInitialLoad(false);
 
         return initialParams;

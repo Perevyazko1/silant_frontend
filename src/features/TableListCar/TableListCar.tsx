@@ -1,9 +1,8 @@
 import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./TableListCar.module.scss"
-import {Button, Form, Table, Modal} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
-import {TableSearch} from "../Table/Table";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {useNavigate} from "react-router-dom";
 

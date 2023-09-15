@@ -3,7 +3,6 @@ import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./TableMaintenance.module.scss"
 import {Form, Table} from "react-bootstrap";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
-import {listMachineSlice} from "../../providers/Api/slice/ListMachineSlice";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
 
 interface TableMaintenanceProps {
