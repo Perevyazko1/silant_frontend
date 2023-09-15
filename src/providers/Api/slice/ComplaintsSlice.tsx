@@ -16,7 +16,7 @@ const initialState: ComplaintsInfoState = {
         "recovery_method": "",
         "parts_used": "",
         "date_of_restoration": "",
-        "get_equipment_downtimeget_equipment_downtime": "",
+        "equipment_downtime": "",
         "machine": "",
         'select_data': {
             'machine': {},

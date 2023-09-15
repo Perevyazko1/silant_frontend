@@ -8,7 +8,7 @@ export interface Complaints{
     "recovery_method": string
     "parts_used": string
     "date_of_restoration": string
-    "get_equipment_downtimeget_equipment_downtime": string
+    "equipment_downtime": string
     "machine": string
     'select_data': {
             'machine': object

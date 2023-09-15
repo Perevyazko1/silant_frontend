@@ -1,15 +1,15 @@
 import {memo, ReactNode, useEffect, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
-import {Button, Table, Form, InputGroup} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import cls from "./Table.module.scss"
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import MainAPI from "../../providers/Api/axios";
 import {listMachineSlice} from "../../providers/Api/slice/ListMachineSlice";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
-import {InputSelect} from "../../shared/ui/InputSelect/InputSelect";
-import {InputArea} from "../../shared/ui/InputArea/InputArea";
 import {authPageSlice} from "../../providers/Api/slice/AuthSlice";
-import maintenanceInfo from "../../providers/Api/slice/MaintenanceSlice";
+import {TableComplaints} from "../../widgets/TableComplaints/TableComplaints";
+import {TableCar} from "../../widgets/TableCar/TableCar";
+import {TableMaintenance} from "../../widgets/TableMaintenance/TableMaintenance";
 
 interface TableProps {
     className?: string
@@ -47,6 +47,23 @@ export const TableSearch = memo((props: TableProps) => {
             alert(result.result)
 
     }
+        async function save_maintenance() {
+        let result = await MainAPI.post_data(`service/api/update_maintenance/`, maintenance)
+            console.log(maintenance)
+            console.log(result)
+            alert(result.result)
+
+    }
+
+        async function save_complaints() {
+        let result = await MainAPI.post_data(`service/api/update_complaints/`, complaints)
+            console.log(complaints)
+            console.log(result)
+            alert(result.result)
+
+    }
+
+
 
 
 
@@ -105,62 +122,15 @@ export const TableSearch = memo((props: TableProps) => {
                     <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>
               }
           </div>
-
-                <Table striped bordered hover responsive>
-                    <thead>
-                    <tr>
-                        <th>Характеристика</th>
-                        <th>Значение</th>
-                    </tr>
-                    </thead>
-                    {isCar &&
-                        <tbody>
-                        <InputArea header={"Зав. № машины"} valueDispatch={"factory_number"} role={updateRole} valueInput={car.factory_number}/>
-                        <InputSelect valueDispatch={"machine_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.machine_models} valueInput={car.machine_model} header={"Модель машины"}/>
-                        <InputSelect valueDispatch={"engine_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.engine_models} valueInput={car.engine_model} header={"Модель двигателя"}/>
-                        <InputArea role={role} valueInput={car.engine_number} valueDispatch={"engine_number"} header={"Зав. № двигателя"}/>
-                        <InputSelect valueDispatch={"transmission_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.transmission_models} valueInput={car.transmission_model} header={"Модель трансмиссии"}/>
-                        <InputArea header={"Зав. № трансмиссии"} valueDispatch={"transmission_number"} role={role} valueInput={car.transmission_number}/>
-                        <InputSelect valueDispatch={"driving_bridge_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.driving_bridge_models} valueInput={car.driving_bridge_model} header={"Модель ведущего моста"}/>
-                        <InputArea role={role} valueInput={car.driving_bridge_number} valueDispatch={"driving_bridge_number"} header={"Зав. № ведущего моста"}/>
-                        <InputSelect valueDispatch={"controlled_bridge_model"} keyInput={"name"} role={role} listMachine={listMachine.filter_data.controlled_bridge_models} valueInput={car.controlled_bridge_model} header={"Модель управляемого моста"}/>
-                        <InputArea role={role} valueInput={car.controlled_bridge_number} valueDispatch={"controlled_bridge_number"} header={"Зав. № управляемого моста"}/>
-                        <InputArea role={role} valueInput={car.delivery_contract} valueDispatch={"delivery_contract"} header={"Договор поставки №, дата"} type={"date"}/>
-                        <InputArea role={role} valueInput={car.date_of_shipment} valueDispatch={"date_of_shipment"} header={"Дата отгрузки с завода"} type={"date"}/>
-                        <InputArea role={role} valueInput={car.consignee} valueDispatch={"consignee"} header={"Грузополучатель (конечный потребитель)"}/>
-                        <InputArea role={role} valueInput={car.delivery_address} valueDispatch={"delivery_address"} header={"Адрес поставки (эксплуатации)"}/>
-                        <InputArea role={role} valueInput={car.complete_set} valueDispatch={"complete_set"} header={"Комплектация (доп. опции)"}/>
-                        <InputSelect valueDispatch={"client"} keyInput={"first_name"} role={role} listMachine={listMachine.users_data} valueInput={car.client} header={"Клиент"}/>
-                        <InputSelect valueDispatch={"service_company"} keyInput={"first_name"} role={role} listMachine={listMachine.services_data} valueInput={car.service_company} header={"Cервисная компания"}/>
-                        </tbody>
-                    }
-                    {isComplaints &&
-                        <tbody>
-                            <InputArea role={role} valueInput={complaints.date_of_refusal} valueDispatch={"date_of_refusal"} header={'Дата отказа'}/>
-                            <InputArea role={role} valueInput={complaints.operating_time} valueDispatch={"operating_time"} header={'Наработка, м/час'}/>
-                            <InputSelect role={role} listMachine={complaints.select_data.failure_node} valueInput={complaints.failure_node} header={'Узел отказа'} keyInput={'name'} valueDispatch={"failure_node"}/>
-                            <InputArea role={role} valueInput={complaints.failure_description} valueDispatch={"failure_description"} header={'Описание отказа'}/>
-                            <InputSelect role={role} listMachine={complaints.select_data.recovery_method} valueInput={complaints.recovery_method} header={'Способ восстановления'} keyInput={'name'} valueDispatch={"recovery_method"}/>
-                            <InputArea role={role} valueInput={complaints.parts_used} valueDispatch={"parts_used"} header={'Используемые запасные части'}/>
-                            <InputArea role={role} valueInput={complaints.date_of_restoration} valueDispatch={"date_of_restoration"} header={'Дата восстановления'}/>
-                            <InputArea role={role} valueInput={complaints.get_equipment_downtimeget_equipment_downtime} valueDispatch={"get_equipment_downtimeget_equipment_downtime"} header={'Время простоя техники'}/>
-                            <InputSelect role={role} listMachine={complaints.select_data.machine} valueInput={complaints.machine} header={'Машина'} keyInput={'factory_number'} valueDispatch={"machinecomplaints.select_data."}/>
-                        </tbody>
-
-                    }
-                    {isMaintenance &&
-                        <tbody>
-                            <InputSelect role={role} listMachine={maintenance.select_data.type_maintenance} valueInput={maintenance.type_of_maintenance} header={"Вид ТО"} keyInput={"name"} valueDispatch={"type_of_maintenance"}/>
-                            <InputArea role={role} valueInput={maintenance.operating_time} valueDispatch={"operating_time"} header={"Наработка, м/час"}/>
-                            <InputArea role={role} valueInput={maintenance.date_of_maintenance} valueDispatch={"date_of_maintenance"} header={"Дата проведения"}/>
-                            <InputArea role={role} valueInput={maintenance.order_number} valueDispatch={"order_number"} header={"№ заказ-наряда"}/>
-                            <InputArea role={role} valueInput={maintenance.order_date} valueDispatch={"order_date"} header={"Дата заказ-наряда"}/>
-                            <InputSelect role={role} listMachine={maintenance.select_data.machine} valueInput={maintenance.machine} header={"Машина"} keyInput={"factory_number"} valueDispatch={"machine"}/>
-                        </tbody>
-
-                    }
-
-                </Table>
+            {isCar &&
+                <TableCar/>
+            }
+            {isComplaints &&
+                <TableComplaints/>
+            }
+            {isMaintenance &&
+                <TableMaintenance/>
+            }
             {isCar &&
                 <div>
                     {role == "manager" &&
@@ -177,7 +147,7 @@ export const TableSearch = memo((props: TableProps) => {
             {isMaintenance &&
                 <div>
                     {role == "manager" &&
-                        <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+                        <Button className={"m-2"} onClick={save_maintenance}>Сохранить</Button>
                     }
                     {role == "manager" &&
                         <Button className={"m-2"} onClick={() => {
@@ -190,7 +160,7 @@ export const TableSearch = memo((props: TableProps) => {
             {isComplaints &&
                 <div>
                     {role == "manager" &&
-                        <Button className={"m-2"} onClick={save_machine}>Сохранить</Button>
+                        <Button className={"m-2"} onClick={save_complaints}>Сохранить</Button>
                     }
                     {role == "manager" &&
                         <Button className={"m-2"} onClick={() => {
