@@ -16,8 +16,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const {maintenance} = useAppSelector(state=>state.maintenanceInfo)
         const {MaintenanceInfo} = maintenanceInfoSlice.actions
 
-
-
+console.log(maintenance.type_of_maintenance)
     const {
         className,
         children,
@@ -65,7 +64,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                               Object.values(maintenance.select_data.type_maintenance).map((model) => (
                                 <option key={model['name']}>{model['name']}</option>
                             ))}
-                            <option disabled={true}>Данные доступны для владельцев техники</option>
+                            <option disabled={true}>Данные Вам недоступны</option>
                       </Form.Control>
                     </td>
                     <td><Form.Control
@@ -100,7 +99,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                               Object.values(maintenance.select_data.machine).map((model) => (
                                 <option key={model['factory_number']}>{model['factory_number']}</option>
                             ))}
-                            <option disabled={true}>Данные доступны для владельцев техники</option>
+                            <option disabled={true}>Данные Вам недоступны</option>
                       </Form.Control>
                     </td>
               </tbody>

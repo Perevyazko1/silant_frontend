@@ -93,7 +93,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                               Object.values(complaints.select_data.failure_node).map((model) => (
                                 <option key={model['name']}>{model['name']}</option>
                             ))}
-                            <option disabled={true}>Данные доступны для владельцев техники</option>
+                            <option disabled={true}>Данные Вам недоступны</option>
                       </Form.Control>
                     </td>
                     <td>
@@ -107,7 +107,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                               Object.values(complaints.select_data.machine).map((model) => (
                                 <option key={model['factory_number']}>{model['factory_number']}</option>
                             ))}
-                            <option disabled={true}>Данные доступны для владельцев техники</option>
+                            <option disabled={true}>Данные Вам недоступны</option>
                       </Form.Control>
                     </td>
                     <td><Form.Control
@@ -135,7 +135,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                               Object.values(complaints.select_data.recovery_method).map((model) => (
                                 <option key={model['name']}>{model['name']}</option>
                             ))}
-                            <option disabled={true}>Данные доступны для владельцев техники</option>
+                            <option disabled={true}>Данные Вам недоступны</option>
                       </Form.Control>
                     </td>
               </tbody>
