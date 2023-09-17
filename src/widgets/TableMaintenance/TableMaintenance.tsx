@@ -44,8 +44,6 @@ console.log(maintenance.type_of_maintenance)
                 </tr>
               </thead>
               <tbody>
-              {maintenance.type_of_maintenance &&
-                  <div>
                       <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_date}
                             onChange={event =>{
@@ -104,8 +102,6 @@ console.log(maintenance.type_of_maintenance)
                                 <option disabled={true}>Данные Вам недоступны</option>
                           </Form.Control>
                         </td>
-                  </div>
-              }
               </tbody>
             </Table>
 

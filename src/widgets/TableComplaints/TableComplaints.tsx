@@ -53,8 +53,6 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                 </tr>
               </thead>
               <tbody>
-                {complaints.failure_node &&
-                    <div>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={complaints.date_of_refusal}
                             onChange={event =>{
@@ -141,8 +139,6 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                                 <option disabled={true}>Данные Вам недоступны</option>
                           </Form.Control>
                         </td>
-                    </div>
-                }
               </tbody>
             </Table>
         </div>
