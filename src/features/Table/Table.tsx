@@ -31,8 +31,9 @@ export const TableSearch = memo((props: TableProps) => {
     const {listMachine} =useAppSelector(state => state.listMachine)
 
 
-    const {username} = useAppSelector(state=>state.authReducer)
+    const {first_name} = useAppSelector(state=>state.authReducer)
     const {role} = useAppSelector(state=>state.authReducer)
+
 
 
     const [isCar,setIsCar]=useState<boolean>(true)
@@ -40,7 +41,7 @@ export const TableSearch = memo((props: TableProps) => {
     const [isMaintenance,setIsMaintenance]=useState<boolean>()
     const [updateRole, setUpdateRole] = useState("client")
     const [inputCar, setInputCar] =useState<string>(car.factory_number)
-
+    const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
         async function save_machine() {
         let result = await MainAPI.post_data(`service/api/update_machine/`, car)
             console.log(result)
@@ -146,7 +147,7 @@ export const TableSearch = memo((props: TableProps) => {
             }
             {isMaintenance &&
                 <div>
-                    {role == "manager" &&
+                    {role == "manager" || car.client == user_name || car.service_company == user_name &&
                         <Button className={"m-2"} onClick={save_maintenance}>Сохранить</Button>
                     }
                     {role == "manager" &&
@@ -159,7 +160,7 @@ export const TableSearch = memo((props: TableProps) => {
             }
             {isComplaints &&
                 <div>
-                    {role == "manager" &&
+                    {role == "manager" || car.client == user_name || car.service_company == user_name &&
                         <Button className={"m-2"} onClick={save_complaints}>Сохранить</Button>
                     }
                     {role == "manager" &&

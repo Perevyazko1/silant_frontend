@@ -26,7 +26,6 @@ export const NavbarComponent = memo((props: NavbarProps) => {
       const {resetAuth} = authPageSlice.actions
       const {resetCar} = carInfoSlice.actions
       const {first_name} = useAppSelector(state=>state.authReducer)
-        console.log(`имя ${first_name}`)
 
       const {isAuthenticated} = authPageSlice.actions
       const {authenticated} =useAppSelector(state=>state.authReducer)
