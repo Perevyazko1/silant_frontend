@@ -1,4 +1,4 @@
-import {memo, ReactNode} from 'react';
+import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./TableMaintenance.module.scss"
 import {Form, Table} from "react-bootstrap";
@@ -15,8 +15,11 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const dispatch = useAppdispatch()
         const {maintenance} = useAppSelector(state=>state.maintenanceInfo)
         const {MaintenanceInfo} = maintenanceInfoSlice.actions
+        const {role} = useAppSelector(state=>state.authReducer)
+        const {car} = useAppSelector(state => state.carInfo)
+        const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
 
-console.log(maintenance.type_of_maintenance)
+
     const {
         className,
         children,
@@ -44,8 +47,9 @@ console.log(maintenance.type_of_maintenance)
                 </tr>
               </thead>
               <tbody>
-                      <td><Form.Control
+                        <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_date}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(MaintenanceInfo({...maintenance, order_date: event.target.value}));
                             }}
@@ -62,13 +66,15 @@ console.log(maintenance.type_of_maintenance)
                           >
                                 {
                                   Object.values(maintenance.select_data.type_maintenance).map((model) => (
-                                    <option key={model['name']}>{model['name']}</option>
+                                    <option disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
+                                            key={model['name']}>{model['name']}</option>
                                 ))}
                                 <option disabled={true}>Данные Вам недоступны</option>
                           </Form.Control>
                         </td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={maintenance.operating_time}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(MaintenanceInfo({...maintenance, operating_time: event.target.value}));
                             }}
@@ -76,6 +82,7 @@ console.log(maintenance.type_of_maintenance)
                         /></td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_number}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(MaintenanceInfo({...maintenance, order_number: event.target.value}));
                             }}
@@ -83,6 +90,7 @@ console.log(maintenance.type_of_maintenance)
                         /></td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={maintenance.date_of_maintenance}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(MaintenanceInfo({...maintenance, date_of_maintenance: event.target.value}));
                             }}
@@ -97,7 +105,8 @@ console.log(maintenance.type_of_maintenance)
                           >
                                 {
                                   Object.values(maintenance.select_data.machine).map((model) => (
-                                    <option key={model['factory_number']}>{model['factory_number']}</option>
+                                    <option disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
+                                            key={model['factory_number']}>{model['factory_number']}</option>
                                 ))}
                                 <option disabled={true}>Данные Вам недоступны</option>
                           </Form.Control>

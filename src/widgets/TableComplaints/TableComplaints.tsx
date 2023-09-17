@@ -55,6 +55,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
               <tbody>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={complaints.date_of_refusal}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(ComplaintsInfo({...complaints, date_of_refusal: event.target.value}));
                             }}
@@ -62,6 +63,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         /></td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={complaints.date_of_restoration}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(ComplaintsInfo({...complaints, date_of_restoration: event.target.value}));
                             }}
@@ -69,6 +71,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         /></td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={String(complaints.equipment_downtime)}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(ComplaintsInfo({...complaints, equipment_downtime: event.target.value}));
                             }}
@@ -76,6 +79,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         /></td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={complaints.failure_description}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(ComplaintsInfo({...complaints, failure_description: event.target.value}));
                             }}
@@ -86,6 +90,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                               className={cls.TextSize}
                               as="select"
                               value={complaints.failure_node}
+                              disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                               onChange={event => {
                                 dispatch(ComplaintsInfo({...complaints, failure_node: event.target.value}));
                               }}
@@ -106,13 +111,15 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                           >
                                 {
                                   Object.values(complaints.select_data.machine).map((model) => (
-                                    <option key={model['factory_number']}>{model['factory_number']}</option>
+                                    <option disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
+                                            key={model['factory_number']}>{model['factory_number']}</option>
                                 ))}
                                 <option disabled={true}>Данные Вам недоступны</option>
                           </Form.Control>
                         </td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={String(complaints.operating_time)}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(ComplaintsInfo({...complaints, operating_time: event.target.value}));
                             }}
@@ -120,6 +127,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         /></td>
                         <td><Form.Control
                             className={cls.TextSize} rows={1} as="textarea" value={complaints.parts_used}
+                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
                             onChange={event =>{
                             dispatch(ComplaintsInfo({...complaints, parts_used: event.target.value}));
                             }}
