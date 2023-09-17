@@ -44,64 +44,68 @@ console.log(maintenance.type_of_maintenance)
                 </tr>
               </thead>
               <tbody>
-                    <td><Form.Control
-                        className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_date}
-                        onChange={event =>{
-                        dispatch(MaintenanceInfo({...maintenance, order_date: event.target.value}));
-                        }}
+              {maintenance.type_of_maintenance &&
+                  <div>
+                      <td><Form.Control
+                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_date}
+                            onChange={event =>{
+                            dispatch(MaintenanceInfo({...maintenance, order_date: event.target.value}));
+                            }}
 
-                    /></td>
-                    <td>
-                      <Form.Control
-                          className={cls.TextSize}
-                          as="select"
-                          value={maintenance.type_of_maintenance}
-                          onChange={event => {
-                            dispatch(MaintenanceInfo({...maintenance, type_of_maintenance: event.target.value}));
-                          }}
-                      >
-                            {
-                              Object.values(maintenance.select_data.type_maintenance).map((model) => (
-                                <option key={model['name']}>{model['name']}</option>
-                            ))}
-                            <option disabled={true}>Данные Вам недоступны</option>
-                      </Form.Control>
-                    </td>
-                    <td><Form.Control
-                        className={cls.TextSize} rows={1} as="textarea" value={maintenance.operating_time}
-                        onChange={event =>{
-                        dispatch(MaintenanceInfo({...maintenance, operating_time: event.target.value}));
-                        }}
+                        /></td>
+                        <td>
+                          <Form.Control
+                              className={cls.TextSize}
+                              as="select"
+                              value={maintenance.type_of_maintenance}
+                              onChange={event => {
+                                dispatch(MaintenanceInfo({...maintenance, type_of_maintenance: event.target.value}));
+                              }}
+                          >
+                                {
+                                  Object.values(maintenance.select_data.type_maintenance).map((model) => (
+                                    <option key={model['name']}>{model['name']}</option>
+                                ))}
+                                <option disabled={true}>Данные Вам недоступны</option>
+                          </Form.Control>
+                        </td>
+                        <td><Form.Control
+                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.operating_time}
+                            onChange={event =>{
+                            dispatch(MaintenanceInfo({...maintenance, operating_time: event.target.value}));
+                            }}
 
-                    /></td>
-                    <td><Form.Control
-                        className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_number}
-                        onChange={event =>{
-                        dispatch(MaintenanceInfo({...maintenance, order_number: event.target.value}));
-                        }}
+                        /></td>
+                        <td><Form.Control
+                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_number}
+                            onChange={event =>{
+                            dispatch(MaintenanceInfo({...maintenance, order_number: event.target.value}));
+                            }}
 
-                    /></td>
-                    <td><Form.Control
-                        className={cls.TextSize} rows={1} as="textarea" value={maintenance.date_of_maintenance}
-                        onChange={event =>{
-                        dispatch(MaintenanceInfo({...maintenance, date_of_maintenance: event.target.value}));
-                        }}
+                        /></td>
+                        <td><Form.Control
+                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.date_of_maintenance}
+                            onChange={event =>{
+                            dispatch(MaintenanceInfo({...maintenance, date_of_maintenance: event.target.value}));
+                            }}
 
-                    /></td>
-                    <td>
-                      <Form.Control className={cls.TextSize} as="select"
-                          value={maintenance.machine}
-                          onChange={event => {
-                            dispatch(MaintenanceInfo({...maintenance, machine: event.target.value}));
-                          }}
-                      >
-                            {
-                              Object.values(maintenance.select_data.machine).map((model) => (
-                                <option key={model['factory_number']}>{model['factory_number']}</option>
-                            ))}
-                            <option disabled={true}>Данные Вам недоступны</option>
-                      </Form.Control>
-                    </td>
+                        /></td>
+                        <td>
+                          <Form.Control className={cls.TextSize} as="select"
+                              value={maintenance.machine}
+                              onChange={event => {
+                                dispatch(MaintenanceInfo({...maintenance, machine: event.target.value}));
+                              }}
+                          >
+                                {
+                                  Object.values(maintenance.select_data.machine).map((model) => (
+                                    <option key={model['factory_number']}>{model['factory_number']}</option>
+                                ))}
+                                <option disabled={true}>Данные Вам недоступны</option>
+                          </Form.Control>
+                        </td>
+                  </div>
+              }
               </tbody>
             </Table>
 
