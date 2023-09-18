@@ -8,13 +8,16 @@ export interface MaintenanceInfoState {
 const initialState: MaintenanceInfoState = {
 
     maintenance:{
-        "id": 0,
-        "type_of_maintenance": "",
-        "date_of_maintenance": "",
-        "operating_time": "",
-        "order_number": "",
-        "order_date": "",
-        "machine":"",
+        "maintenance_data":[{
+            "id": "",
+            "type_of_maintenance__name": "",
+            "date_of_maintenance": "",
+            "operating_time": "",
+            "order_number": "",
+            "order_date": "",
+            "machine_id__factory_number":""
+        }]
+        ,
         "select_data":{
             "machine": {},
             "type_maintenance" : {}

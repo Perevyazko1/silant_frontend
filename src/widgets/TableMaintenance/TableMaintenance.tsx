@@ -1,9 +1,11 @@
 import {memo, ReactNode, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import cls from "./TableMaintenance.module.scss"
-import {Form, Table} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
+import {Maintenance} from "../../providers/Api/models/Maintenance";
+import moment from 'moment'
 
 interface TableMaintenanceProps {
     className?: string
@@ -18,7 +20,8 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const {role} = useAppSelector(state=>state.authReducer)
         const {car} = useAppSelector(state => state.carInfo)
         const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
-
+        const maintenances: Maintenance[] = [maintenance]
+        console.log(maintenance)
 
     const {
         className,
@@ -35,7 +38,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
             className={classNames(cls.TableMaintenance, mods, [className])}
             {...otherProps}
         >
-                        <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive>
               <thead>
                 <tr>
                   <th>Дата проведения ТО</th>
@@ -47,70 +50,17 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                 </tr>
               </thead>
               <tbody>
-                        <td><Form.Control
-                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_date}
-                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
-                            onChange={event =>{
-                            dispatch(MaintenanceInfo({...maintenance, order_date: event.target.value}));
-                            }}
+              {maintenance.maintenance_data.map((item)=>(
+                  <tr key={item.id}>
+                      <td>{moment(item.date_of_maintenance).format("DD.MM.YYYY")}</td>
+                      <td>{item.type_of_maintenance__name}</td>
+                      <td>{item.operating_time}</td>
+                      <td>{item.order_number}</td>
+                      <td>{moment(item.order_date).format("DD.MM.YYYY")}</td>
+                      <td>{item.machine_id__factory_number}</td>
+                  </tr>
+              ))}
 
-                        /></td>
-                        <td>
-                          <Form.Control
-                              className={cls.TextSize}
-                              as="select"
-                              value={maintenance.type_of_maintenance}
-                              onChange={event => {
-                                dispatch(MaintenanceInfo({...maintenance, type_of_maintenance: event.target.value}));
-                              }}
-                          >
-                                {
-                                  Object.values(maintenance.select_data.type_maintenance).map((model) => (
-                                    <option disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
-                                            key={model['name']}>{model['name']}</option>
-                                ))}
-                                <option disabled={true}>Данные Вам недоступны</option>
-                          </Form.Control>
-                        </td>
-                        <td><Form.Control
-                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.operating_time}
-                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
-                            onChange={event =>{
-                            dispatch(MaintenanceInfo({...maintenance, operating_time: event.target.value}));
-                            }}
-
-                        /></td>
-                        <td><Form.Control
-                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.order_number}
-                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
-                            onChange={event =>{
-                            dispatch(MaintenanceInfo({...maintenance, order_number: event.target.value}));
-                            }}
-
-                        /></td>
-                        <td><Form.Control
-                            className={cls.TextSize} rows={1} as="textarea" value={maintenance.date_of_maintenance}
-                            disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
-                            onChange={event =>{
-                            dispatch(MaintenanceInfo({...maintenance, date_of_maintenance: event.target.value}));
-                            }}
-
-                        /></td>
-                        <td>
-                          <Form.Control className={cls.TextSize} as="select"
-                              value={maintenance.machine}
-                              onChange={event => {
-                                dispatch(MaintenanceInfo({...maintenance, machine: event.target.value}));
-                              }}
-                          >
-                                {
-                                  Object.values(maintenance.select_data.machine).map((model) => (
-                                    <option disabled={role !== "manager" || car.client !== user_name || car.service_company !== user_name}
-                                            key={model['factory_number']}>{model['factory_number']}</option>
-                                ))}
-                                <option disabled={true}>Данные Вам недоступны</option>
-                          </Form.Control>
-                        </td>
               </tbody>
             </Table>
 
