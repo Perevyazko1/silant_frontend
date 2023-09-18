@@ -50,7 +50,6 @@ export const InputSelect = memo((props: InputSelectProps) => {
                             as="select"
                             value={valueInput}
                             onChange={event => {
-                                console.log(event.target.value)
                             dispatch(infoCar({...car, [valueDispatch]: event.target.value}));
                             }}
 

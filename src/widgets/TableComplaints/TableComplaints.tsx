@@ -55,7 +55,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
               </thead>
               <tbody>
               {complaints.complaints_data.map((item)=>(
-                  <tr key={item.id}>
+                  <tr key={item.id} onClick={()=> console.log(item.id)}>
                       <td>{moment(item.date_of_refusal).format("DD.MM.YYYY")}</td>
                       <td>{moment(item.date_of_restoration).format("DD.MM.YYYY")}</td>
                       <td>{item.operating_time}</td>

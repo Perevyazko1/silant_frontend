@@ -1,8 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Maintenance} from "../models/Maintenance";
+import {MaintenanceUnit} from "../models/MaintenanceUnit";
 
 export interface MaintenanceInfoState {
     maintenance:Maintenance;
+    unit_maintenance: MaintenanceUnit
 }
 
 const initialState: MaintenanceInfoState = {
@@ -22,7 +24,20 @@ const initialState: MaintenanceInfoState = {
             "machine": {},
             "type_maintenance" : {}
         }
-}
+    },
+    unit_maintenance:{
+            "id": "",
+            "type_of_maintenance": "",
+            "date_of_maintenance": "",
+            "operating_time": "",
+            "order_number": "",
+            "order_date": "",
+            "machine":""
+
+    }
+
+
+
 }
 
 export const maintenanceInfoSlice = createSlice({
@@ -32,6 +47,9 @@ export const maintenanceInfoSlice = createSlice({
         MaintenanceInfo(state, action: PayloadAction<Maintenance>){
             state.maintenance = action.payload
         },
+        MaintenanceUnit(state, action: PayloadAction<MaintenanceUnit>){
+            state.unit_maintenance = action.payload
+        }
     }
 })
 
