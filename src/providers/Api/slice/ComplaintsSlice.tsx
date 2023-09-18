@@ -8,16 +8,18 @@ export interface ComplaintsInfoState {
 const initialState: ComplaintsInfoState = {
 
     complaints:{
-        id: "",
-        "date_of_refusal": "",
-        "operating_time": "",
-        "failure_node": "",
-        "failure_description": "",
-        "recovery_method": "",
-        "parts_used": "",
-        "date_of_restoration": "",
-        "equipment_downtime": "",
-        "machine": "",
+        "complaints_data":[{
+            "id": "",
+            "date_of_refusal": "",
+            "operating_time": "",
+            "failure_node_id__name": "",
+            "failure_description": "",
+            "recovery_method_id__name": "",
+            "parts_used": "",
+            "date_of_restoration": "",
+            "equipment_downtime": "",
+            "machine_id__factory_number": "",
+        }],
         'select_data': {
             'machine': {},
             'failure_node': {},
