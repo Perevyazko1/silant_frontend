@@ -1,8 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Complaints} from "../models/Complaints";
+import {ComplaintUnit} from "../models/ComplaintUnit";
 
 export interface ComplaintsInfoState {
     complaints:Complaints;
+    unit_complaint:ComplaintUnit
 }
 
 const initialState: ComplaintsInfoState = {
@@ -24,9 +26,22 @@ const initialState: ComplaintsInfoState = {
             'machine': {},
             'failure_node': {},
             'recovery_method': {}
+        }},
+        unit_complaint:{
+            'id': "",
+            'date_of_refusal': "",
+            'operating_time': "",
+            'failure_node': "",
+            'failure_description': "",
+            'recovery_method': "",
+            'parts_used': "",
+            'date_of_restoration': "",
+            'equipment_downtime': "",
+            'machine': "",
+
         }
 
-}
+
 }
 
 export const complaintsInfoSlice = createSlice({
@@ -36,6 +51,9 @@ export const complaintsInfoSlice = createSlice({
         ComplaintsInfo(state, action: PayloadAction<Complaints>){
             state.complaints = action.payload
         },
+        ComplaintsUnit(state, action:PayloadAction<ComplaintUnit>){
+            state.unit_complaint = action.payload
+        }
     }
 })
 
