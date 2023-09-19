@@ -22,12 +22,23 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
     const dispatch = useAppdispatch()
     const {ComplaintsInfo} = complaintsInfoSlice.actions
     const {ComplaintsUnit} = complaintsInfoSlice.actions
+    const {ComplaintIsDDownload} = complaintsInfoSlice.actions
     const [show, setShow] = useState(false)
 
     const handleClose = () => setShow(false);
       const handleShow = () => {
           setShow(true);
       }
+      async function save_complaint() {
+        let result = await MainAPI.post_data(`service/api/update_complaints/`, unit_complaint)
+          dispatch(ComplaintIsDDownload(true))
+            // dispatch(ComplaintsInfo({...complaints, complaints_data: result}));
+            console.log(unit_complaint)
+            console.log(result)
+            alert(result.result)
+
+    }
+
 
       const get_complaint_unit = async (event: { preventDefault: () => void; },id:string) => {
         event.preventDefault();
@@ -323,7 +334,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
 
 
                     </td>
-                    <Button>Сохранить</Button>
+                    <Button onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
                 </Modal.Body>
           </Modal>
 

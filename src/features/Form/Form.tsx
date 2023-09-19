@@ -23,6 +23,9 @@ export const FormSearch = memo((props: FormProps) => {
     const {isLoadingCar} = carInfoSlice.actions
     const {MaintenanceInfo} = maintenanceInfoSlice.actions
     const {ComplaintsInfo} = complaintsInfoSlice.actions
+    const {ComplaintIsDDownload} = complaintsInfoSlice.actions
+    const {unit_complaint} = useAppSelector(state=>state.complaintsInfo)
+    const {is_download} = useAppSelector(state => state.complaintsInfo)
 
 
     const [number_car,setNumber_car]=useState<string>()
@@ -58,11 +61,12 @@ export const FormSearch = memo((props: FormProps) => {
         useEffect(() => {
         const event = {
             preventDefault: () => {},
-        };if(number_car){
+        };if(number_car && is_download === true ){
             get_info(event);
+            dispatch(ComplaintIsDDownload(false))
             }
 
-    }, [numberCar]);
+    }, [numberCar,is_download]);
 
     const {
         className,
