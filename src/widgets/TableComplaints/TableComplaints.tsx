@@ -23,6 +23,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
     const {ComplaintsInfo} = complaintsInfoSlice.actions
     const {ComplaintsUnit} = complaintsInfoSlice.actions
     const {ComplaintIsDDownload} = complaintsInfoSlice.actions
+    const {ResetComplaint} = complaintsInfoSlice.actions
     const [show, setShow] = useState(false)
         const {is_download_complaint} = useAppSelector(state => state.complaintsInfo)
 
@@ -336,7 +337,8 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
 
 
                     </td>
-                    <Button onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
+                    <Button className={"m-2"} onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
+                    <Button className={"m-2"} onClick={()=>dispatch(ResetComplaint())}>Создать новую Рекламацию</Button>
                 </Modal.Body>
           </Modal>
 

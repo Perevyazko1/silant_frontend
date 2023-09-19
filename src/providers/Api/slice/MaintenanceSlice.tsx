@@ -54,6 +54,9 @@ export const maintenanceInfoSlice = createSlice({
         },
         MaintenanceIsDDownload(state, action: PayloadAction<boolean>){
             state.is_download_maintenance = action.payload
+        },
+        ResetMaintenance(state){
+            state.unit_maintenance = initialState.unit_maintenance
         }
     }
 })

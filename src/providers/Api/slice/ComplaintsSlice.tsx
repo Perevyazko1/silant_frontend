@@ -59,6 +59,9 @@ export const complaintsInfoSlice = createSlice({
         },
         ComplaintIsDDownload(state, action:PayloadAction<boolean>){
             state.is_download_complaint = action.payload
+        },
+        ResetComplaint(state){
+            state.unit_complaint = initialState.unit_complaint
         }
     }
 })
