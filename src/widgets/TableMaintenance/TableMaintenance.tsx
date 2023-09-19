@@ -25,7 +25,6 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
         const [show, setShow] = useState(false);
         const [idM, setIdm] = useState<string>()
-        console.log(maintenance.select_data)
 
         const get_maintenance_unit = async (event: { preventDefault: () => void; },id:string) => {
         event.preventDefault();

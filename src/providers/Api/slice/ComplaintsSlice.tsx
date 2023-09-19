@@ -26,7 +26,8 @@ const initialState: ComplaintsInfoState = {
             'machine': {},
             'failure_node': {},
             'recovery_method': {}
-        }},
+        }
+    },
         unit_complaint:{
             'id': "",
             'date_of_refusal': "",
