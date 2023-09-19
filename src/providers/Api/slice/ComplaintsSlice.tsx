@@ -5,7 +5,7 @@ import {ComplaintUnit} from "../models/ComplaintUnit";
 export interface ComplaintsInfoState {
     complaints:Complaints;
     unit_complaint:ComplaintUnit;
-    is_download: boolean
+    is_download_complaint: boolean
 }
 
 const initialState: ComplaintsInfoState = {
@@ -42,7 +42,7 @@ const initialState: ComplaintsInfoState = {
             'machine': "",
 
         },
-    is_download:false
+    is_download_complaint:false
 
 
 }
@@ -58,7 +58,7 @@ export const complaintsInfoSlice = createSlice({
             state.unit_complaint = action.payload
         },
         ComplaintIsDDownload(state, action:PayloadAction<boolean>){
-            state.is_download = action.payload
+            state.is_download_complaint = action.payload
         }
     }
 })

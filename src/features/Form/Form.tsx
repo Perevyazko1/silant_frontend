@@ -25,7 +25,7 @@ export const FormSearch = memo((props: FormProps) => {
     const {ComplaintsInfo} = complaintsInfoSlice.actions
     const {ComplaintIsDDownload} = complaintsInfoSlice.actions
     const {unit_complaint} = useAppSelector(state=>state.complaintsInfo)
-    const {is_download} = useAppSelector(state => state.complaintsInfo)
+    const {is_download_complaint} = useAppSelector(state => state.complaintsInfo)
 
 
     const [number_car,setNumber_car]=useState<string>()
@@ -66,7 +66,7 @@ export const FormSearch = memo((props: FormProps) => {
             dispatch(ComplaintIsDDownload(false))
             }
 
-    }, [numberCar,is_download]);
+    }, [numberCar,is_download_complaint]);
 
     const {
         className,
