@@ -26,7 +26,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const [show, setShow] = useState(false);
         const [idM, setIdm] = useState<string>()
         const {MaintenanceIsDDownload} = maintenanceInfoSlice.actions
-            const {is_download_maintenance} =useAppSelector(state => state.maintenanceInfo)
+        const {ResetMaintenance} = maintenanceInfoSlice.actions
 
 
 
@@ -193,7 +193,8 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                             /></td>
                         </tr>
                     </td>
-                    <Button onClick={()=>{save_maintenance();setShow(false)}}>Сохранить</Button>
+                    <Button className={"m-2"} onClick={()=>{save_maintenance();setShow(false)}}>Сохранить</Button>
+                    <Button className={"m-2"} onClick={()=>dispatch(ResetMaintenance())}>Создать новое ТО</Button>
                 </Modal.Body>
           </Modal>
 
