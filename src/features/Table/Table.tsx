@@ -49,13 +49,6 @@ export const TableSearch = memo((props: TableProps) => {
 
     }
 
-        async function save_complaints() {
-        let result = await MainAPI.post_data(`service/api/update_complaints/`, complaints)
-            console.log(complaints)
-            console.log(result)
-            alert(result.result)
-
-    }
 
 
 
@@ -154,7 +147,7 @@ export const TableSearch = memo((props: TableProps) => {
             {isComplaints &&
                 <div>
                     {role == "manager" || car.client == user_name || car.service_company == user_name &&
-                        <Button className={"m-2"} onClick={save_complaints}>Сохранить</Button>
+                        <Button className={"m-2"} >Сохранить</Button>
                     }
                     {role == "manager" &&
                         <Button className={"m-2"} onClick={() => {

@@ -25,6 +25,10 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
         const [show, setShow] = useState(false);
         const [idM, setIdm] = useState<string>()
+        const {MaintenanceIsDDownload} = maintenanceInfoSlice.actions
+            const {is_download_maintenance} =useAppSelector(state => state.maintenanceInfo)
+
+
 
         const get_maintenance_unit = async (event: { preventDefault: () => void; },id:string) => {
         event.preventDefault();
@@ -41,6 +45,16 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
          catch (error) {
             console.log(`Ошибка ${error}`)
         }}
+
+        async function save_maintenance() {
+        let result = await MainAPI.post_data(`service/api/update_maintenance/`, unit_maintenance)
+
+            dispatch(MaintenanceIsDDownload(true))
+
+            alert(result.result)
+
+    }
+
 
 
 
@@ -78,7 +92,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
               </thead>
               <tbody>
               {maintenance.maintenance_data.map((item)=>(
-                  <tr key={item.id} onClick={(event)=>{handleShow();get_maintenance_unit(event,item.id)}}>
+                  <tr key={item.id} onClick={(event)=>{dispatch(MaintenanceIsDDownload(false));handleShow();get_maintenance_unit(event,item.id)}}>
                       <td>{moment(item.date_of_maintenance).format("DD.MM.YYYY")}</td>
                       <td>{item.type_of_maintenance__name}</td>
                       <td>{item.operating_time}</td>
@@ -179,7 +193,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                             /></td>
                         </tr>
                     </td>
-                    <Button>Сохранить</Button>
+                    <Button onClick={()=>{save_maintenance();setShow(false)}}>Сохранить</Button>
                 </Modal.Body>
           </Modal>
 

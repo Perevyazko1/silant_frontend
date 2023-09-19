@@ -4,7 +4,8 @@ import {MaintenanceUnit} from "../models/MaintenanceUnit";
 
 export interface MaintenanceInfoState {
     maintenance:Maintenance;
-    unit_maintenance: MaintenanceUnit
+    unit_maintenance: MaintenanceUnit;
+    is_download_maintenance: boolean
 }
 
 const initialState: MaintenanceInfoState = {
@@ -34,7 +35,8 @@ const initialState: MaintenanceInfoState = {
             "order_date": "",
             "machine":""
 
-    }
+    },
+    is_download_maintenance: false
 
 
 
@@ -49,6 +51,9 @@ export const maintenanceInfoSlice = createSlice({
         },
         MaintenanceUnit(state, action: PayloadAction<MaintenanceUnit>){
             state.unit_maintenance = action.payload
+        },
+        MaintenanceIsDDownload(state, action: PayloadAction<boolean>){
+            state.is_download_maintenance = action.payload
         }
     }
 })

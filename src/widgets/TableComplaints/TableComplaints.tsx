@@ -24,6 +24,8 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
     const {ComplaintsUnit} = complaintsInfoSlice.actions
     const {ComplaintIsDDownload} = complaintsInfoSlice.actions
     const [show, setShow] = useState(false)
+        const {is_download_complaint} = useAppSelector(state => state.complaintsInfo)
+
 
     const handleClose = () => setShow(false);
       const handleShow = () => {
@@ -34,7 +36,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
           dispatch(ComplaintIsDDownload(true))
             // dispatch(ComplaintsInfo({...complaints, complaints_data: result}));
             console.log(unit_complaint)
-            console.log(result)
+
             alert(result.result)
 
     }
@@ -93,7 +95,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
               </thead>
               <tbody>
               {complaints.complaints_data.map((item)=>(
-                  <tr key={item.id} onClick={(event)=>{handleShow();get_complaint_unit(event,item.id)}}>
+                  <tr key={item.id} onClick={(event)=>{dispatch(ComplaintIsDDownload(false));handleShow();get_complaint_unit(event,item.id)}}>
                       <td>{moment(item.date_of_refusal).format("DD.MM.YYYY")}</td>
                       <td>{moment(item.date_of_restoration).format("DD.MM.YYYY")}</td>
                       <td>{item.operating_time}</td>
