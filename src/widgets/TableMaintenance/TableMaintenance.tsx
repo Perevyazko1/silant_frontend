@@ -6,6 +6,7 @@ import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
 import {Maintenance} from "../../providers/Api/models/Maintenance";
 import moment from 'moment'
+import MainAPI from "../../providers/Api/axios";
 
 interface TableMaintenanceProps {
     className?: string
@@ -25,6 +26,23 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const [show, setShow] = useState(false);
         const [idM, setIdm] = useState<string>()
         console.log(maintenance.select_data)
+
+        const get_maintenance_unit = async (event: { preventDefault: () => void; },id:string) => {
+        event.preventDefault();
+
+        try {
+            let maintenance_unit = await MainAPI.get_data(`service/api/maintenance_unit/?maintenance_id=${id}`)
+            dispatch(MaintenanceUnit(maintenance_unit))
+
+            if (!maintenance_unit){
+                alert("Такой рекламации не существует")
+            }
+
+        }
+         catch (error) {
+            console.log(`Ошибка ${error}`)
+        }}
+
 
 
           const handleClose = () => setShow(false);
@@ -61,7 +79,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
               </thead>
               <tbody>
               {maintenance.maintenance_data.map((item)=>(
-                  <tr key={item.id} onClick={()=>{handleShow();setIdm(item.id)}}>
+                  <tr key={item.id} onClick={(event)=>{handleShow();get_maintenance_unit(event,item.id)}}>
                       <td>{moment(item.date_of_maintenance).format("DD.MM.YYYY")}</td>
                       <td>{item.type_of_maintenance__name}</td>
                       <td>{item.operating_time}</td>
@@ -85,7 +103,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                                     <Form.Control
                                         disabled={role !== 'manager'}
                                         as="select"
-                                        // value={valueInput}
+                                        value={unit_maintenance.type_of_maintenance}
                                 onChange={event =>{
                                 dispatch(MaintenanceUnit({...unit_maintenance, type_of_maintenance: event.target.value}));
                                 }}
@@ -104,7 +122,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                                 <Form.Control
                                     disabled={role !== 'manager'}
                                     as="select"
-                                    // value={valueInput}
+                                    value={unit_maintenance.machine}
                                 onChange={event =>{
                                 dispatch(MaintenanceUnit({...unit_maintenance, machine: event.target.value}));
                                 }}
@@ -122,6 +140,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                            <td>
                                 <Form.Control
                                  rows={1} as="textarea"
+                                 value={unit_maintenance.date_of_maintenance}
                                 onChange={event =>{
                                 dispatch(MaintenanceUnit({...unit_maintenance, date_of_maintenance: event.target.value}));
                                 }}
@@ -132,6 +151,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                            <td>
                                 <Form.Control
                                  rows={1} as="textarea"
+                                 value={unit_maintenance.operating_time}
                                 onChange={event =>{
                                 dispatch(MaintenanceUnit({...unit_maintenance, operating_time: event.target.value}));
                                 }}
@@ -142,6 +162,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                            <td>
                                 <Form.Control
                                  rows={1} as="textarea"
+                                 value={unit_maintenance.order_number}
                                 onChange={event =>{
                                 dispatch(MaintenanceUnit({...unit_maintenance, order_number: event.target.value}));
                                 }}
@@ -152,13 +173,14 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                            <td>
                                 <Form.Control
                                  rows={1} as="textarea"
+                                 value={unit_maintenance.order_date}
                                 onChange={event =>{
                                 dispatch(MaintenanceUnit({...unit_maintenance, order_date: event.target.value}));
                                 }}
                             /></td>
                         </tr>
                     </td>
-                    <Button onClick={()=> console.log(unit_maintenance)}>Сохранить</Button>
+                    <Button>Сохранить</Button>
                 </Modal.Body>
           </Modal>
 
