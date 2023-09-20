@@ -29,6 +29,7 @@ export const TableSearch = memo((props: TableProps) => {
     const {listMachine} =useAppSelector(state => state.listMachine)
     const {first_name} = useAppSelector(state=>state.authReducer)
     const {role} = useAppSelector(state=>state.authReducer)
+    console.log(role)
 
 
 
@@ -98,12 +99,12 @@ export const TableSearch = memo((props: TableProps) => {
           <h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>
           <div className={cls.ContainerButton}>
             <Button onClick={()=>{setIsCar(true); setIsMaintenance(false); setIsComplaints(false)}} className={cls.Button} variant="warning">Общая инфо</Button>
-              {role!=="anonymous" && car.service_company === localStorage.getItem("first_name_user") &&
+              {role === "manager" || car.client === localStorage.getItem("first_name_user") || car.service_company === localStorage.getItem("first_name_user") ? (
                     <Button onClick={()=>{setIsCar(false); setIsMaintenance(true); setIsComplaints(false)}} className={cls.Button} variant="warning">ТО</Button>
-              }
-              {role!=="anonymous" && car.service_company === localStorage.getItem("first_name_user") &&
+                  ): null}
+              {role === "manager" || car.client === localStorage.getItem("first_name_user") || car.service_company === localStorage.getItem("first_name_user") ? (
                     <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>
-              }
+              ): null}
           </div>
             {isCar &&
                 <TableCar/>
