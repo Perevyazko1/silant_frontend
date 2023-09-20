@@ -51,12 +51,16 @@ export const TableListCar = memo((props: TableListCarProps) => {
                 <Table striped bordered hover responsive>
                     <thead>
                         <tr>
-                            <th>Машина</th>
+                            <th>Модель техники</th>
                             <th>Заводской номер</th>
                             <th>Модель двигателя</th>
+                            <th>Зав. № двигателя</th>
                             <th>Модель трансмиссии</th>
+                            <th>Зав. № трансмиссии</th>
                             <th>Модель ведущего моста</th>
+                            <th>Зав. № ведущего моста</th>
                             <th>Модель управляемого моста</th>
+                            <th>Зав. № управляемого моста</th>
                         </tr>
                     </thead>
                         <tbody>
@@ -64,18 +68,20 @@ export const TableListCar = memo((props: TableListCarProps) => {
                             Array.isArray(listMachine.machine_list_data) &&
                             listMachine.machine_list_data.map((machine) => (
                                 <tr key={machine.id}
-
-                                >
-                                    <td>{machine.machine_model__name}</td>
-                                    <td
                                         onClick={() => {dispatch(numberCars(machine.factory_number))
                                                             navigate("/")
                                         }}
-                                    >{machine.factory_number}</td>
+                                >
+                                    <td>{machine.machine_model__name}</td>
+                                    <td>{machine.factory_number}</td>
                                     <td>{machine.engine_model__name}</td>
+                                     <td></td>
                                     <td>{machine.transmission_model__name}</td>
+                                     <td></td>
                                     <td>{machine.driving_bridge_model__name}</td>
+                                     <td></td>
                                     <td>{machine.controlled_bridge_model__name}</td>
+                                     <td></td>
                                 </tr>
                             ))}
 
