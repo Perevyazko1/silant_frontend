@@ -61,7 +61,13 @@ export const complaintsInfoSlice = createSlice({
             state.is_download_complaint = action.payload
         },
         ResetComplaint(state){
-            state.unit_complaint = initialState.unit_complaint
+            const {failure_node,recovery_method,machine} = state.unit_complaint;
+            state.unit_complaint = {
+                ...initialState.unit_complaint,
+                failure_node,
+                recovery_method,
+                machine
+            }
         }
     }
 })

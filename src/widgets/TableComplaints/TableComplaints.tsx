@@ -263,7 +263,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                                 >
                                     {
                                       Object.values(complaints.select_data.machine).map((model) => (
-                                        <option key={model['factory_number']}>{model['factory_number']}</option>
+                                        <option disabled={true} key={model['factory_number']}>{model['factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>
@@ -305,6 +305,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                            <td>Описание Отказа</td>
                            <td>
                                 <Form.Control
+                                required
                                  rows={1} as="textarea"
                                  value={unit_complaint.failure_description}
                                 onChange={event =>{
