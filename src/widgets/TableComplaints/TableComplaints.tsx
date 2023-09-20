@@ -338,8 +338,12 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
 
 
                     </td>
-                    <Button className={"m-2"} onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
-                    <Button className={"m-2"} onClick={()=>dispatch(ResetComplaint())}>Создать новую Рекламацию</Button>
+                    {role!=="client" &&
+                        <div>
+                            <Button className={"m-2"} onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
+                            <Button className={"m-2"} onClick={()=>dispatch(ResetComplaint())}>Создать новую Рекламацию</Button>
+                        </div>
+                    }
                 </Modal.Body>
           </Modal>
 

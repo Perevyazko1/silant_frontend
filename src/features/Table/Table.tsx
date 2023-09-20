@@ -20,8 +20,6 @@ interface TableProps {
 export const TableSearch = memo((props: TableProps) => {
     const {complaints} = useAppSelector(state=>state.complaintsInfo)
     const {maintenance} = useAppSelector(state=>state.maintenanceInfo)
-
-
     const dispatch = useAppdispatch()
     const {infoCar} = carInfoSlice.actions
     const {resetCar} = carInfoSlice.actions
@@ -29,10 +27,10 @@ export const TableSearch = memo((props: TableProps) => {
     const {ListMachineSlice} = listMachineSlice.actions
     const {isRole} = authPageSlice.actions
     const {listMachine} =useAppSelector(state => state.listMachine)
-
-
     const {first_name} = useAppSelector(state=>state.authReducer)
     const {role} = useAppSelector(state=>state.authReducer)
+    console.log(first_name)
+    // console.log(car.service_company)
 
 
 
@@ -102,10 +100,10 @@ export const TableSearch = memo((props: TableProps) => {
           <h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>
           <div className={cls.ContainerButton}>
             <Button onClick={()=>{setIsCar(true); setIsMaintenance(false); setIsComplaints(false)}} className={cls.Button} variant="warning">Общая инфо</Button>
-              {role!=="anonymous" &&
+              {role!=="anonymous" && car.service_company === localStorage.getItem("first_name_user") &&
                     <Button onClick={()=>{setIsCar(false); setIsMaintenance(true); setIsComplaints(false)}} className={cls.Button} variant="warning">ТО</Button>
               }
-              {role!=="anonymous" &&
+              {role!=="anonymous" && car.service_company === localStorage.getItem("first_name_user") &&
                     <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>
               }
           </div>
