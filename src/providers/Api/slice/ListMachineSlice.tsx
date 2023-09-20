@@ -43,7 +43,12 @@ const initialState: ListMachineState = {
             factory_number:"",
             id:null,
             machine_model__name:"",
-            transmission_model__name:""
+            transmission_model__name:"",
+            engine_number: "",
+            transmission_number: "",
+            driving_bridge_number: "",
+            controlled_bridge_number: "",
+
         },
         users_data: {},
         services_data: {}

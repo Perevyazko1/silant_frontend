@@ -75,13 +75,13 @@ export const TableListCar = memo((props: TableListCarProps) => {
                                     <td>{machine.machine_model__name}</td>
                                     <td>{machine.factory_number}</td>
                                     <td>{machine.engine_model__name}</td>
-                                     <td></td>
+                                     <td>{machine.engine_number}</td>
                                     <td>{machine.transmission_model__name}</td>
-                                     <td></td>
+                                     <td>{machine.transmission_number}</td>
                                     <td>{machine.driving_bridge_model__name}</td>
-                                     <td></td>
+                                     <td>{machine.driving_bridge_number}</td>
                                     <td>{machine.controlled_bridge_model__name}</td>
-                                     <td></td>
+                                     <td>{machine.controlled_bridge_number}</td>
                                 </tr>
                             ))}
 
