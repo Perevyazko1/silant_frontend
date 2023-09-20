@@ -29,8 +29,6 @@ export const TableSearch = memo((props: TableProps) => {
     const {listMachine} =useAppSelector(state => state.listMachine)
     const {first_name} = useAppSelector(state=>state.authReducer)
     const {role} = useAppSelector(state=>state.authReducer)
-    console.log(first_name)
-    // console.log(car.service_company)
 
 
 
