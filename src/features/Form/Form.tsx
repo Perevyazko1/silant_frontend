@@ -23,6 +23,7 @@ export const FormSearch = memo((props: FormProps) => {
     const {isLoadingCar} = carInfoSlice.actions
     const {MaintenanceInfo} = maintenanceInfoSlice.actions
     const {ComplaintsInfo} = complaintsInfoSlice.actions
+    const {numberCars} =carInfoSlice.actions
     const {ComplaintIsDDownload} = complaintsInfoSlice.actions
     const {MaintenanceIsDDownload} = maintenanceInfoSlice.actions
     const {unit_complaint} = useAppSelector(state=>state.complaintsInfo)
@@ -39,9 +40,9 @@ export const FormSearch = memo((props: FormProps) => {
 
         try {
             dispatch(resetCar())
-            let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${number_car}`)
-            let maintenance = await MainAPI.get_data(`service/api/maintenance/?factory_number=${number_car}`)
-            let complaints = await MainAPI.get_data(`service/api/complaints/?factory_number=${number_car}`)
+            let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${numberCar}`)
+            let maintenance = await MainAPI.get_data(`service/api/maintenance/?factory_number=${numberCar}`)
+            let complaints = await MainAPI.get_data(`service/api/complaints/?factory_number=${numberCar}`)
             dispatch(infoCar(machine))
             dispatch(MaintenanceInfo(maintenance))
             dispatch(ComplaintsInfo(complaints))
@@ -56,15 +57,16 @@ export const FormSearch = memo((props: FormProps) => {
         }}
 
 
-        useEffect(()=>{
-            setNumber_car(numberCar)
-        },[numberCar])
+        // useEffect(()=>{
+        //     setNumber_car(numberCar)
+        //     dispatch()
+        // },[numberCar])
 
         useEffect(() => {
         const event = {
             preventDefault: () => {},
         };
-        if(number_car && is_download_complaint === true && is_download_maintenance === true){
+        if(numberCar && is_download_complaint === true && is_download_maintenance === true){
             get_info(event);
         }
 
@@ -89,7 +91,7 @@ export const FormSearch = memo((props: FormProps) => {
               <Form>
                 <Form.Group controlId="formSerialNumber">
                   <Form.Label>Заводской номер</Form.Label>
-                  <Form.Control onChange={(event) => setNumber_car(event.target.value)} type="text" placeholder="Введите заводской номер" />
+                  <Form.Control onChange={(event) => dispatch(numberCars(event.target.value))} type="text" placeholder="Введите заводской номер" />
                 </Form.Group>
                 <Button onClick={get_info} className={cls.Button} variant="warning" >
                   Найти

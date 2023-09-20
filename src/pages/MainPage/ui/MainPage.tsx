@@ -36,7 +36,7 @@ const MainPage = memo((props: MainPageProps) => {
                 {...otherProps}
             >
                 <FormSearch/>
-                {car?.factory_number && <TableSearch/>}
+                {car?.controlled_bridge_model && <TableSearch/>}
                 <Carusel/>
             </div>
         </PageWrapper>

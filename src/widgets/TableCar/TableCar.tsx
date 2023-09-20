@@ -9,6 +9,7 @@ import {useAppSelector} from "../../shared/hooks/Redux/redux";
 interface TableCarProps {
     className?: string
     children?: ReactNode
+    updateRole: string
 }
 
 
@@ -17,11 +18,12 @@ export const TableCar = memo((props: TableCarProps) => {
     const {role} = useAppSelector(state=>state.authReducer)
     const {car} = useAppSelector(state => state.carInfo)
     const {listMachine} =useAppSelector(state => state.listMachine)
-    const [updateRole, setUpdateRole] = useState("client")
+    // const [updateRole, setUpdateRole] = useState("client")
 
     const {
         className,
         children,
+        updateRole,
         ...otherProps
     } = props
 

@@ -29,7 +29,7 @@ export const TableSearch = memo((props: TableProps) => {
     const {listMachine} =useAppSelector(state => state.listMachine)
     const {first_name} = useAppSelector(state=>state.authReducer)
     const {role} = useAppSelector(state=>state.authReducer)
-    console.log(role)
+    const {numberCar} = useAppSelector(state => state.carInfo)
 
 
 
@@ -68,6 +68,9 @@ export const TableSearch = memo((props: TableProps) => {
                  catch (error) {
                     console.log(`Ошибка ${error}`)
         }}
+        useEffect(()=>{
+            setUpdateRole("client");
+        },[numberCar])
         useEffect(() => {
             const roleUser = localStorage.getItem("role_user");
             if (roleUser !== null && roleUser !== "anonymous" && roleUser !== "") { dispatch(isRole(roleUser));
@@ -107,7 +110,7 @@ export const TableSearch = memo((props: TableProps) => {
               ): null}
           </div>
             {isCar &&
-                <TableCar/>
+                <TableCar updateRole={updateRole}/>
             }
             {isComplaints &&
                 <TableComplaints/>
@@ -126,33 +129,6 @@ export const TableSearch = memo((props: TableProps) => {
                             setUpdateRole(role)
                         }}>Создать новую машину</Button>
                     }
-                </div>
-            }
-            {isMaintenance &&
-                <div>
-                    {role == "manager" || car.client == user_name || car.service_company == user_name &&
-                        <Button className={"m-2"} >Сохранить</Button>
-                    }
-                    {role == "manager" &&
-                        <Button className={"m-2"} onClick={() => {
-                            dispatch(resetCar())
-                            setUpdateRole(role)
-                        }}>Добавать ТО</Button>
-                    }
-                </div>
-            }
-            {isComplaints &&
-                <div>
-                    {role == "manager" || car.client == user_name || car.service_company == user_name &&
-                        <Button className={"m-2"} >Сохранить</Button>
-                    }
-                    {role == "manager" &&
-                        <Button className={"m-2"} onClick={() => {
-                            dispatch(resetCar())
-                            setUpdateRole(role)
-                        }}>Добавать Рекламацию</Button>
-                    }
-                    {children}
                 </div>
             }
         </div>
