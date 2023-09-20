@@ -12,7 +12,7 @@ interface TableMaintenanceProps {
     className?: string
     children?: ReactNode
 }
-
+//TODO настроить перезагрузку страницы после добавления ТО
 
 export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const dispatch = useAppdispatch()
@@ -143,7 +143,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                                 >
                                     {
                                       Object.values(maintenance.select_data.machine).map((model) => (
-                                        <option key={model['factory_number']}>{model['factory_number']}</option>
+                                        <option disabled={true} key={model['factory_number']}>{model['factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>
