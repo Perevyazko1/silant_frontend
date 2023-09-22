@@ -24,7 +24,13 @@ const initialState: MaintenanceInfoState = {
         "select_data":{
             "machine": {},
             "type_maintenance" : {}
+        },
+        'filter_data':{
+            "type_of_maintenance": {},
+            "service_company": {},
+            "machine": {}
         }
+
     },
     unit_maintenance:{
             "id": "",
