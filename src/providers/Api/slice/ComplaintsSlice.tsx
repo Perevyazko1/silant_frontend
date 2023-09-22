@@ -27,7 +27,13 @@ const initialState: ComplaintsInfoState = {
             'machine': {},
             'failure_node': {},
             'recovery_method': {}
-        }
+        },
+        'filter_data':{
+            'failure_node': {},
+            'recovery_method': {},
+            'service_company': {}
+                }
+
     },
         unit_complaint:{
             'id': "",

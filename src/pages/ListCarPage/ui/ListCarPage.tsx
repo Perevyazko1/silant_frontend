@@ -28,7 +28,7 @@ interface ListCarPageProps {
                 className={classNames(cls.ListCarPage, mods, [className])}
                 {...otherProps}
             >
-                <Filter/>
+
                 <TableListCar/>
                 {children}
             </div>

@@ -17,5 +17,11 @@ export interface Complaints{
             'failure_node': object
             'recovery_method': object
         }
+        'filter_data':{
+            'failure_node': object
+            'recovery_method': object
+            'service_company': object
+                }
+
 
 }
