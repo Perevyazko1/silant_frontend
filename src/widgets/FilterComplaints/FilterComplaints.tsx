@@ -68,6 +68,7 @@ export const FilterComplaints = memo((props: FilterComplaintsProps) => {
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Узел отказа</Form.Label>
                 <Form.Control
+                    value={queryParameters.failure_node}
                     onChange={event => {
                     setQueryParam("failure_node",event.target.value);
                 }}
@@ -84,6 +85,7 @@ export const FilterComplaints = memo((props: FilterComplaintsProps) => {
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Способ восстановления</Form.Label>
                 <Form.Control
+                    value={queryParameters.recovery_method}
                     onChange={event => {
                     setQueryParam("recovery_method",event.target.value);
                 }}
@@ -99,6 +101,7 @@ export const FilterComplaints = memo((props: FilterComplaintsProps) => {
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Сервисная Компания</Form.Label>
                 <Form.Control
+                    value={queryParameters.service_company_maintenance_complaints}
                     onChange={event => {
                     setQueryParam("service_company_maintenance_complaints",event.target.value);
                 }}

@@ -134,7 +134,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                           Главная
                         </Link>
                         <Link className="dropdown-item" to={"/listcar"}>
-                          Список машин
+                          Ваша Техника
                         </Link>
                       </NavDropdown>
                   }

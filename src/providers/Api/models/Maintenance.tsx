@@ -13,8 +13,8 @@ export interface Maintenance{
             "type_maintenance" :object
         }
         "filter_data":{
-            "type_of_maintenance": object,
-            "service_company": object,
+            "type_of_maintenance": object
+            "service_company": object
             "machine": object
         }
 

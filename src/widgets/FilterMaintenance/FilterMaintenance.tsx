@@ -68,6 +68,7 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Тип ТО</Form.Label>
                 <Form.Control
+                    value={queryParameters.type_of_maintenance}
                     onChange={event => {
                     setQueryParam("type_of_maintenance",event.target.value);
                 }}
@@ -83,6 +84,7 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Сервисная Компания</Form.Label>
                 <Form.Control
+                    value={queryParameters.service_company_maintenance}
                     onChange={event => {
                     setQueryParam("service_company_maintenance",event.target.value);
                 }}
@@ -98,6 +100,7 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Машина</Form.Label>
                 <Form.Control
+                    value={queryParameters.machine_number_maintenance}
                     onChange={event => {
                     setQueryParam("machine_number_maintenance",event.target.value);
                 }}

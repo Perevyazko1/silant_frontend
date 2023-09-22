@@ -1,31 +1,10 @@
 export interface ListMachine{
             filter_data:{
-                controlled_bridge_models:{
-                    0:{
-                        name:string
-                    }
-                },
-                driving_bridge_models:{
-                    0:{
-                        name:string
-                    }
-                },
-                engine_models:{
-                    0:{
-                        name:string
-                    }
-                },
-                machine_models:{
-                    0:{
-                        name:string
-                    }
-                },
-                transmission_models:{
-                    0:{
-                        name:string
-                    }
-
-                }
+                controlled_bridge_models: object
+                driving_bridge_models: object
+                engine_models:object
+                machine_models: object
+                transmission_models: object
         },
             machine_list_data:object,
             users_data: object,

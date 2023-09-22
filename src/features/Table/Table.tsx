@@ -99,25 +99,25 @@ export const TableSearch = memo((props: TableProps) => {
             className={classNames(cls.TableSearch, mods, [className])}
             {...otherProps}
         >
-          <h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>
-          <div className={cls.ContainerButton}>
-            <Button onClick={()=>{setIsCar(true); setIsMaintenance(false); setIsComplaints(false)}} className={cls.Button} variant="warning">Общая инфо</Button>
-              {role === "manager" || car.client === localStorage.getItem("first_name_user") || car.service_company === localStorage.getItem("first_name_user") ? (
-                    <Button onClick={()=>{setIsCar(false); setIsMaintenance(true); setIsComplaints(false)}} className={cls.Button} variant="warning">ТО</Button>
-                  ): null}
-              {role === "manager" || car.client === localStorage.getItem("first_name_user") || car.service_company === localStorage.getItem("first_name_user") ? (
-                    <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>
-              ): null}
-          </div>
+          {/*<h4 className={cls.Header}>Информация о комплектации и технических характеристиках вашей техники</h4>*/}
+          {/*<div className={cls.ContainerButton}>*/}
+          {/*  <Button onClick={()=>{setIsCar(true); setIsMaintenance(false); setIsComplaints(false)}} className={cls.Button} variant="warning">Общая инфо</Button>*/}
+          {/*    {role === "manager" || car.client === localStorage.getItem("first_name_user") || car.service_company === localStorage.getItem("first_name_user") ? (*/}
+          {/*          <Button onClick={()=>{setIsCar(false); setIsMaintenance(true); setIsComplaints(false)}} className={cls.Button} variant="warning">ТО</Button>*/}
+          {/*        ): null}*/}
+          {/*    {role === "manager" || car.client === localStorage.getItem("first_name_user") || car.service_company === localStorage.getItem("first_name_user") ? (*/}
+          {/*          <Button onClick={()=>{setIsCar(false); setIsMaintenance(false); setIsComplaints(true)}} className={cls.Button} variant="warning">Рекламации</Button>*/}
+          {/*    ): null}*/}
+          {/*</div>*/}
             {isCar &&
                 <TableCar updateRole={updateRole}/>
             }
-            {isComplaints &&
-                <TableComplaints/>
-            }
-            {isMaintenance &&
-                <TableMaintenance/>
-            }
+            {/*{isComplaints &&*/}
+            {/*    <TableComplaints/>*/}
+            {/*}*/}
+            {/*{isMaintenance &&*/}
+            {/*    <TableMaintenance/>*/}
+            {/*}*/}
             {isCar &&
                 <div>
                     {role == "manager" &&

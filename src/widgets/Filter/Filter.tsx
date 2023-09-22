@@ -27,15 +27,20 @@ export const Filter = memo((props: FilterProps) => {
         event.preventDefault();
 
         try {
-            let list_machine = await MainAPI.get_data(`service/api/machine_list/?`+
+            let list_machine = await MainAPI.get_data(
+                // 'service/api/machine_list/?factory_number=&machine_model=Все модели&engine_model=Все модели&transmission_model=Все модели&driving_bridge_model=Все модели&controlled_bridge_model=Все модели'
+                `service/api/machine_list/?`+
 
-            `${!!queryParameters.factory_number ? `factory_number=${queryParameters.factory_number}` :"factory_number="}` +
-            `&machine_model=${!!queryParameters.machine_model ? queryParameters.machine_model :"Все модели"}`+
+            // `${!!queryParameters.factory_number ? `factory_number=${queryParameters.factory_number}` :"factory_number="}` +
+            `machine_model=${!!queryParameters.machine_model ? queryParameters.machine_model :"Все модели"}`+
             `&engine_model=${!!queryParameters.engine_model ? queryParameters.engine_model :"Все модели"}`+
             `&transmission_model=${!!queryParameters.transmission_model ? queryParameters.transmission_model :"Все модели"}`+
             `&driving_bridge_model=${!!queryParameters.driving_bridge_model ? queryParameters.driving_bridge_model :"Все модели"}`+
-            `&controlled_bridge_model=${!!queryParameters.controlled_bridge_model ? queryParameters.controlled_bridge_model :"Все модели"}`)
-                dispatch(ListMachineSlice(list_machine))
+            `&controlled_bridge_model=${!!queryParameters.controlled_bridge_model ? queryParameters.controlled_bridge_model :"Все модели"}`
+
+            )
+            console.log(list_machine)
+            dispatch(ListMachineSlice(list_machine))
             if (!list_machine){
                 alert("Такого номера не существует")
             }
@@ -68,35 +73,39 @@ export const Filter = memo((props: FilterProps) => {
             {...otherProps}
         >
             <Form className={cls.Form}>
-              <Form.Group className={cls.Input} controlId="formSerialNumber">
-                <Form.Label>Заводской номер машины</Form.Label>
-                <Form.Control onChange={event => {
-                setQueryParam("factory_number", event.target.value)
-            }} type="text" placeholder="Введите заводской номер" />
-              </Form.Group>
+            {/*  <Form.Group className={cls.Input} controlId="formSerialNumber">*/}
+            {/*    <Form.Label>Заводской номер машины</Form.Label>*/}
+            {/*    <Form.Control onChange={event => {*/}
+            {/*    setQueryParam("factory_number", event.target.value)*/}
+            {/*}} type="text" placeholder="Введите заводской номер" />*/}
+            {/*  </Form.Group>*/}
 
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Модель техники</Form.Label>
-                <Form.Control onChange={event => {
+                <Form.Control
+                    value={queryParameters.machine_model}
+                    onChange={event => {
                     setQueryParam("machine_model",event.target.value)
                 }} as="select">
                   <option >Все модели</option>
                   {listMachine &&
                       Object.values(listMachine.filter_data.machine_models).map((model) => (
-                        <option key={model['name']}>{model['name']}</option>
+                        <option key={model['machine_model__name']}>{model['machine_model__name']}</option>
                     ))}
                 </Form.Control>
               </Form.Group>
 
               <Form.Group className={cls.Input} controlId="formEngineModel">
                 <Form.Label>Модель двигателя</Form.Label>
-                <Form.Control onChange={event => {
+                <Form.Control
+                    value={queryParameters.engine_model}
+                    onChange={event => {
                     setQueryParam("engine_model",event.target.value)
                 }} as="select">
                   <option>Все модели</option>
                     {listMachine &&
                       Object.values(listMachine.filter_data.engine_models).map((model) => (
-                        <option key={model['name']}>{model['name']}</option>
+                        <option key={model['engine_model__name']}>{model['engine_model__name']}</option>
                     ))}
 
                 </Form.Control>
@@ -104,13 +113,15 @@ export const Filter = memo((props: FilterProps) => {
 
               <Form.Group className={cls.Input} controlId="formTransmissionModel">
                 <Form.Label>Модель трансмиссии</Form.Label>
-                <Form.Control onChange={event => {
+                <Form.Control
+                    value={queryParameters.transmission_model}
+                    onChange={event => {
                     setQueryParam("transmission_model",event.target.value)
                 }} as="select">
                   <option>Все модели</option>
                     {listMachine &&
                       Object.values(listMachine.filter_data.transmission_models).map((model) => (
-                        <option key={model['name']}>{model['name']}</option>
+                        <option key={model['transmission_model__name']}>{model['transmission_model__name']}</option>
                     ))}
 
                 </Form.Control>
@@ -118,13 +129,15 @@ export const Filter = memo((props: FilterProps) => {
 
               <Form.Group className={cls.Input} controlId="formAxleModel">
                 <Form.Label>Модель ведущего моста</Form.Label>
-                <Form.Control onChange={event => {
+                <Form.Control
+                    value={queryParameters.driving_bridge_model}
+                    onChange={event => {
                     setQueryParam("driving_bridge_model",event.target.value)
                 }} as="select">
                   <option>Все модели</option>
                     {listMachine &&
                       Object.values(listMachine.filter_data.driving_bridge_models).map((model) => (
-                        <option key={model['name']}>{model['name']}</option>
+                        <option key={model['driving_bridge_model__name']}>{model['driving_bridge_model__name']}</option>
                     ))}
 
                 </Form.Control>
@@ -138,7 +151,7 @@ export const Filter = memo((props: FilterProps) => {
                   <option>Все модели</option>
                     {listMachine &&
                       Object.values(listMachine.filter_data.controlled_bridge_models).map((model) => (
-                        <option key={model['name']}>{model['name']}</option>
+                        <option key={model['controlled_bridge_model__name']}>{model['controlled_bridge_model__name']}</option>
                     ))}
 
                 </Form.Control>
