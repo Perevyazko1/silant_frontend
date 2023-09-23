@@ -66,7 +66,7 @@ export const FormSearch = memo((props: FormProps) => {
         const event = {
             preventDefault: () => {},
         };
-        if(numberCar && is_download_complaint === true && is_download_maintenance === true){
+            {numberCar  &&
             get_info(event);
         }
 
