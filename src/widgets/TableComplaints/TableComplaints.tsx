@@ -87,8 +87,8 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                   <th>Дата Отказа</th>
                   <th>Дата Восстановления</th>
                   <th>Простой Техники ч.</th>
-                  <th>Описание Отказа</th>
                   <th>Узел Отказа</th>
+                  <th>Описание Отказа</th>
                   <th>Машина</th>
                   <th>Наработка, м/час</th>
                   <th>Используемые Запасные Части</th>
