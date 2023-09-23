@@ -25,7 +25,8 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
     const {ComplaintIsDDownload} = complaintsInfoSlice.actions
     const {ResetComplaint} = complaintsInfoSlice.actions
     const [show, setShow] = useState(false)
-        const {is_download_complaint} = useAppSelector(state => state.complaintsInfo)
+    const {is_download_complaint} = useAppSelector(state => state.complaintsInfo)
+    const [updateRole, setUpdateRole] = useState("client")
 
 
     const handleClose = () => setShow(false);
@@ -96,7 +97,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
               </thead>
               <tbody>
               {complaints.complaints_data.map((item)=>(
-                  <tr key={item.id} onClick={(event)=>{dispatch(ComplaintIsDDownload(false));handleShow();get_complaint_unit(event,item.id)}}>
+                  <tr key={item.id} onClick={(event)=>{dispatch(ComplaintIsDDownload(false));handleShow(); setUpdateRole("client");get_complaint_unit(event,item.id)}}>
                       <td>{moment(item.date_of_refusal).format("DD.MM.YYYY")}</td>
                       <td>{moment(item.date_of_restoration).format("DD.MM.YYYY")}</td>
                       <td>{item.operating_time}</td>
@@ -253,7 +254,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         <td>Машина</td>
                             <td>
                                 <Form.Control
-                                    disabled={role !== 'manager'}
+                                    disabled={updateRole !== 'manager'}
                                     as="select"
                                     value={unit_complaint.machine}
                                 onChange={event =>{
@@ -263,7 +264,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                                 >
                                     {
                                       Object.values(complaints.select_data.machine).map((model) => (
-                                        <option disabled={true} key={model['factory_number']}>{model['factory_number']}</option>
+                                        <option  key={model['factory_number']}>{model['factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>
@@ -272,6 +273,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                             <td>Дата Отказа</td>
                            <td>
                                 <Form.Control
+                                disabled={role=='client'}
                                  rows={1} as="textarea"
                                  value={unit_complaint.date_of_refusal}
                                 onChange={event =>{
@@ -283,6 +285,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                            <td>Дата Восстановления</td>
                            <td>
                                 <Form.Control
+                                disabled={role=='client'}
                                  rows={1} as="textarea"
                                  value={unit_complaint.date_of_restoration}
                                 onChange={event =>{
@@ -294,6 +297,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                            <td>Простой Техники ч.</td>
                            <td>
                                 <Form.Control
+                                disabled={role=='client'}
                                  rows={1} as="textarea"
                                  value={unit_complaint.equipment_downtime}
                                 onChange={event =>{
@@ -305,6 +309,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                            <td>Описание Отказа</td>
                            <td>
                                 <Form.Control
+                                disabled={role=='client'}
                                 required
                                  rows={1} as="textarea"
                                  value={unit_complaint.failure_description}
@@ -317,6 +322,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                            <td>Наработка, м/час</td>
                            <td>
                                 <Form.Control
+                                disabled={role=='client'}
                                  rows={1} as="textarea"
                                  value={unit_complaint.operating_time}
                                 onChange={event =>{
@@ -328,6 +334,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                            <td>Используемые Запасные Части</td>
                            <td>
                                 <Form.Control
+                                disabled={role=='client'}
                                  rows={1} as="textarea"
                                  value={unit_complaint.parts_used}
                                 onChange={event =>{
@@ -341,7 +348,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                     {role!=="client" &&
                         <div>
                             <Button className={"m-2"} onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
-                            <Button className={"m-2"} onClick={()=>dispatch(ResetComplaint())}>Создать новую Рекламацию</Button>
+                            <Button className={"m-2"} onClick={()=>{dispatch(ResetComplaint()); setUpdateRole("manager")}}>Создать новую Рекламацию</Button>
                         </div>
                     }
                 </Modal.Body>

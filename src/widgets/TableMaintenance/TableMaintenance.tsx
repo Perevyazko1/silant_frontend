@@ -27,6 +27,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const [idM, setIdm] = useState<string>()
         const {MaintenanceIsDDownload} = maintenanceInfoSlice.actions
         const {ResetMaintenance} = maintenanceInfoSlice.actions
+        const [updateRole, setUpdateRole] = useState("client")
 
 
 
@@ -92,7 +93,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
               </thead>
               <tbody>
               {maintenance.maintenance_data.map((item)=>(
-                  <tr key={item.id} onClick={(event)=>{dispatch(MaintenanceIsDDownload(false));handleShow();get_maintenance_unit(event,item.id)}}>
+                  <tr key={item.id} onClick={(event)=>{dispatch(MaintenanceIsDDownload(false));handleShow();setUpdateRole("client"); get_maintenance_unit(event,item.id)}}>
                       <td>{moment(item.date_of_maintenance).format("DD.MM.YYYY")}</td>
                       <td>{item.type_of_maintenance__name}</td>
                       <td>{item.operating_time}</td>
@@ -114,7 +115,6 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                             <td>Вид технического обслуживания</td>
                                 <td>
                                     <Form.Control
-                                        disabled={role !== 'manager'}
                                         as="select"
                                         value={unit_maintenance.type_of_maintenance}
                                 onChange={event =>{
@@ -133,7 +133,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                         <td>Машина</td>
                             <td>
                                 <Form.Control
-                                    disabled={role !== 'manager'}
+                                    disabled={updateRole !== 'manager'}
                                     as="select"
                                     value={unit_maintenance.machine}
                                 onChange={event =>{
@@ -143,7 +143,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                                 >
                                     {
                                       Object.values(maintenance.select_data.machine).map((model) => (
-                                        <option disabled={true} key={model['factory_number']}>{model['factory_number']}</option>
+                                        <option  key={model['factory_number']}>{model['factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>
@@ -194,7 +194,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                         </tr>
                     </td>
                     <Button className={"m-2"} onClick={()=>{save_maintenance();setShow(false)}}>Сохранить</Button>
-                    <Button className={"m-2"} onClick={()=>dispatch(ResetMaintenance())}>Создать новое ТО</Button>
+                    <Button className={"m-2"} onClick={()=>{dispatch(ResetMaintenance());setUpdateRole("manager")}}>Создать новое ТО</Button>
                 </Modal.Body>
           </Modal>
 
