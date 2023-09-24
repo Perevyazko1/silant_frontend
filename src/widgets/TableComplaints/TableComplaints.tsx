@@ -17,6 +17,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
     const {complaints} = useAppSelector(state=>state.complaintsInfo)
     const {unit_complaint} = useAppSelector(state=>state.complaintsInfo)
     const {car} = useAppSelector(state => state.carInfo)
+    const {maintenance} = useAppSelector(state=>state.maintenanceInfo)
     const {role} = useAppSelector(state=>state.authReducer)
     const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
     const dispatch = useAppdispatch()
@@ -216,6 +217,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                             <td>Узел отказа</td>
                                 <td>
                                     <Form.Control
+                                        disabled={role=='client'}
                                         as="select"
                                         value={unit_complaint.failure_node}
                                 onChange={event =>{
@@ -234,6 +236,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         <td>Способ восстановления</td>
                             <td>
                                 <Form.Control
+                                    disabled={role=='client'}
                                     as="select"
                                     value={unit_complaint.recovery_method}
                                 onChange={event =>{
@@ -261,8 +264,8 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
 
                                 >
                                     {
-                                      Object.values(complaints.select_data.machine).map((model) => (
-                                        <option  key={model['factory_number']}>{model['factory_number']}</option>
+                                      Object.values(maintenance.filter_data.machine).map((model) => (
+                                        <option key={model['machine__factory_number']}>{model['machine__factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>
