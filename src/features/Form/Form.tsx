@@ -41,9 +41,8 @@ export const FormSearch = memo((props: FormProps) => {
         try {
             dispatch(resetCar())
             let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${numberCar}`)
-            // let maintenance = await MainAPI.get_data(`service/api/maintenance/?factory_number=${numberCar}`)
-            // let complaints = await MainAPI.get_data(`service/api/complaints/?factory_number=${numberCar}`)
             dispatch(infoCar(machine))
+            // console.log(machine)
             // dispatch(MaintenanceInfo(maintenance))
             // dispatch(ComplaintsInfo(complaints))
             dispatch((isLoadingCar(true)))

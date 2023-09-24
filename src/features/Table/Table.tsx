@@ -32,7 +32,6 @@ export const TableSearch = memo((props: TableProps) => {
     const {numberCar} = useAppSelector(state => state.carInfo)
 
 
-
     const [isCar,setIsCar]=useState<boolean>(true)
     const [isComplaints, setIsComplaints]=useState<boolean>()
     const [isMaintenance,setIsMaintenance]=useState<boolean>()
@@ -41,7 +40,6 @@ export const TableSearch = memo((props: TableProps) => {
     const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
         async function save_machine() {
         let result = await MainAPI.post_data(`service/api/update_machine/`, car)
-            console.log(result)
             alert(result.result)
 
     }
@@ -51,23 +49,25 @@ export const TableSearch = memo((props: TableProps) => {
 
 
 
-            const get_input_fields = async (event: { preventDefault: () => void; }) => {
-                event.preventDefault();
-
-                try {
-                    let input_fields = await MainAPI.get_data(`service/api/machine_list/?`+
-                            "factory_number=" +
-                            "&machine_model=Все модели"+
-                            "&engine_model=Все модели"+
-                            "&transmission_model=Все модели"+
-                            "&driving_bridge_model=Все модели"+
-                            "&controlled_bridge_model=Все модели")
-                    dispatch(ListMachineSlice(input_fields))
-                        }
-
-                 catch (error) {
-                    console.log(`Ошибка ${error}`)
-        }}
+        //     const get_input_fields = async (event: { preventDefault: () => void; }) => {
+        //         event.preventDefault();
+        //
+        //         try {
+        //             let input_fields = await MainAPI.get_data(`service/api/machine_list/?`+
+        //                     "factory_number=" +
+        //                     "&machine_model=Все модели"+
+        //                     "&engine_model=Все модели"+
+        //                     "&transmission_model=Все модели"+
+        //                     "&driving_bridge_model=Все модели"+
+        //                     "&controlled_bridge_model=Все модели")
+        //             console.log(input_fields)
+        //             console.log('сработало')
+        //             dispatch(ListMachineSlice(input_fields))
+        //                 }
+        //
+        //          catch (error) {
+        //             console.log(`Ошибка ${error}`)
+        // }}
         useEffect(()=>{
             setUpdateRole("client");
         },[numberCar])
@@ -75,12 +75,12 @@ export const TableSearch = memo((props: TableProps) => {
             const roleUser = localStorage.getItem("role_user");
             if (roleUser !== null && roleUser !== "anonymous" && roleUser !== "") { dispatch(isRole(roleUser));
             } }, []);
-        useEffect(() => {
-        const event = {
-            preventDefault: () => {},
-        }
-            get_input_fields(event);
-        }, []);
+        // useEffect(() => {
+        // const event = {
+        //     preventDefault: () => {},
+        // }
+        //     get_input_fields(event);
+        // }, []);
 
 
 
