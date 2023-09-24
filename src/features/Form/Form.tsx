@@ -69,7 +69,7 @@ export const FormSearch = memo((props: FormProps) => {
             get_info(event);
         }
 
-    }, [numberCar,is_download_complaint,is_download_maintenance]);
+    }, []);
 
     const {
         className,
