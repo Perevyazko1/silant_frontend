@@ -142,8 +142,8 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
 
                                 >
                                     {
-                                      Object.values(maintenance.select_data.machine).map((model) => (
-                                        <option  key={model['factory_number']}>{model['factory_number']}</option>
+                                      Object.values(maintenance.filter_data.machine).map((model) => (
+                                        <option key={model['machine__factory_number']}>{model['machine__factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>
