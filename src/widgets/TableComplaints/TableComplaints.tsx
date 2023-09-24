@@ -216,7 +216,6 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                             <td>Узел отказа</td>
                                 <td>
                                     <Form.Control
-                                        disabled={role !== 'manager'}
                                         as="select"
                                         value={unit_complaint.failure_node}
                                 onChange={event =>{
@@ -235,7 +234,6 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                         <td>Способ восстановления</td>
                             <td>
                                 <Form.Control
-                                    disabled={role !== 'manager'}
                                     as="select"
                                     value={unit_complaint.recovery_method}
                                 onChange={event =>{
