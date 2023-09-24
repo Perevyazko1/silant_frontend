@@ -58,7 +58,7 @@ export const carInfoSlice = createSlice({
             state.isloading = action.payload
         },
         resetCar(state) {
-            const {service_company,client,driving_bridge_model,engine_model,transmission_model,controlled_bridge_model} = state.car;
+            const {services_data,users_data,filter_data,service_company,client,driving_bridge_model,engine_model,transmission_model,controlled_bridge_model} = state.car;
             state.car = {
                 ...initialState.car,
                 service_company,
@@ -67,6 +67,9 @@ export const carInfoSlice = createSlice({
                 engine_model,
                 transmission_model,
                 controlled_bridge_model,
+                filter_data,
+                users_data,
+                services_data
             }
         },
 
