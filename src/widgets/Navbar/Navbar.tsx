@@ -124,9 +124,9 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                 bg="primary" variant="dark" expand="lg" >
               <Container>
                 <Navbar.Brand href="#"><img className={cls.Brand} src={brand}/> </Navbar.Brand>
-                <Nav className="me-auto">
-                  <Nav.Link href="tel:+7-8352-20-12-09">+7-8352-20-12-09</Nav.Link>
-                  <Nav.Link href="https://telegram.org">Telegram</Nav.Link>
+                <Nav className={cls.Element}>
+                  <Nav.Link  href="tel:+7-8352-20-12-09">+7-8352-20-12-09</Nav.Link>
+                  <Nav.Link  href="https://telegram.org">Telegram</Nav.Link>
                 </Nav>
                   {auth &&
                     <NavDropdown className="text-white m-2" title="Выбор страницы" id="basic-nav-dropdown">
@@ -140,7 +140,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                   }
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse className={cls.Navbar} id="basic-navbar-nav">
-                    <h6 className="text-white">{user_name}</h6>
+                    <h6 className={cls.UserName}>{user_name}</h6>
                   <Nav className="ms-auto">
                     <Nav.Link href="#">Электронная сервисная книжка Мой Силант</Nav.Link>
                       {auth?(<Button onClick={localStorageСlear} className="m-2" variant="warning" type="submit">Выйти</Button>):(<Button  onClick={handleShow}  variant="warning">Авторизация</Button>)}
