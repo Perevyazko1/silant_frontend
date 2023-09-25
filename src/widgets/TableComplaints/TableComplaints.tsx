@@ -31,11 +31,15 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
           setShow(true);
       }
       async function save_complaint() {
-        let result = await MainAPI.post_data(`service/api/update_complaints/`, unit_complaint)
-          dispatch(ComplaintIsDDownload(true))
-            console.log(unit_complaint)
-
+          const datePattern = /^(0[1-9]|[12][0-9]|3[01])[./-](0[1-9]|1[0-2])[./-](\d{4})$/;
+          if (datePattern.test(unit_complaint.date_of_refusal) && datePattern.test(unit_complaint.date_of_restoration)){
+            let result = await MainAPI.post_data(`service/api/update_complaints/`, unit_complaint)
+              dispatch(ComplaintIsDDownload(true))
+              setShow(false)
             alert(result.result)
+              }else {
+              alert("Некорректный формат даты! Введите дату в формате dd.mm.yyyy");
+          }
 
     }
 
@@ -249,7 +253,7 @@ export const TableComplaints = memo((props: TableComplaintsProps) => {
                     </td>
                     {role!=="client" &&
                         <div>
-                            <Button className={"m-2"} onClick={()=>{save_complaint();setShow(false)}} >Сохранить</Button>
+                            <Button className={"m-2"} onClick={()=>{save_complaint()}} >Сохранить</Button>
                             <Button className={"m-2"} onClick={()=>{dispatch(ResetComplaint()); setUpdateRole("manager")}}>Создать новую Рекламацию</Button>
                         </div>
                     }

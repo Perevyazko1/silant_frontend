@@ -26,8 +26,13 @@ export const TableSearch = memo((props: TableProps) => {
     const [isCar,setIsCar]=useState<boolean>(true)
     const [updateRole, setUpdateRole] = useState("client")
         async function save_machine() {
-        let result = await MainAPI.post_data(`service/api/update_machine/`, car)
+        const datePattern = /^(0[1-9]|[12][0-9]|3[01])[./-](0[1-9]|1[0-2])[./-](\d{4})$/;
+        if (datePattern.test(car.date_of_shipment)) {
+            let result = await MainAPI.post_data(`service/api/update_machine/`, car)
             alert(result.result)
+        }else {
+            alert("Некорректный формат даты! Введите дату в формате dd.mm.yyyy");
+        }
 
     }
 

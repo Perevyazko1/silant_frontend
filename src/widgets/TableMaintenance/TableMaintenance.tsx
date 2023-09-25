@@ -6,6 +6,8 @@ import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
 import moment from 'moment'
 import MainAPI from "../../providers/Api/axios";
+import DateInput from "../../shared/ui/DateInput/DateInput";
+import DatePicker from "../../shared/ui/DateInput/DateInput";
 
 interface TableMaintenanceProps {
     className?: string
@@ -32,7 +34,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
             dispatch(MaintenanceUnit(maintenance_unit))
 
             if (!maintenance_unit){
-                alert("Такой рекламации не существует")
+                alert("Такого ТО не существует")
             }
 
         }
@@ -41,12 +43,15 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         }}
 
         async function save_maintenance() {
-        let result = await MainAPI.post_data(`service/api/update_maintenance/`, unit_maintenance)
-
-            dispatch(MaintenanceIsDDownload(true))
-
-            alert(result.result)
-
+            const datePattern = /^(0[1-9]|[12][0-9]|3[01])[./-](0[1-9]|1[0-2])[./-](\d{4})$/;
+            if (datePattern.test(unit_maintenance.date_of_maintenance) && datePattern.test(unit_maintenance.order_date)){
+                let result = await MainAPI.post_data(`service/api/update_maintenance/`, unit_maintenance)
+                dispatch(MaintenanceIsDDownload(true));
+                setShow(false);
+                alert(result.result)
+            }else {
+                alert("Некорректный формат даты! Введите дату в формате dd.mm.yyyy");
+            }
     }
 
 
@@ -186,7 +191,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                             /></td>
                         </tr>
                     </td>
-                    <Button className={"m-2"} onClick={()=>{save_maintenance();setShow(false)}}>Сохранить</Button>
+                    <Button className={"m-2"} onClick={()=>{save_maintenance()}}>Сохранить</Button>
                     <Button className={"m-2"} onClick={()=>{dispatch(ResetMaintenance());setUpdateRole("manager")}}>Создать новое ТО</Button>
                 </Modal.Body>
           </Modal>
