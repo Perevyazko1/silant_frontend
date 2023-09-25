@@ -6,8 +6,6 @@ import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
 import moment from 'moment'
 import MainAPI from "../../providers/Api/axios";
-import DateInput from "../../shared/ui/DateInput/DateInput";
-import DatePicker from "../../shared/ui/DateInput/DateInput";
 
 interface TableMaintenanceProps {
     className?: string
