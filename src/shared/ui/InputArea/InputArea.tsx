@@ -7,7 +7,6 @@ import {carInfoSlice} from "../../../providers/Api/slice/CarSlice";
 interface InputAreaProps {
     className?: string
     children?: ReactNode
-    // onChange: () => event
     role: string
     type?:string
     valueInput: string
@@ -23,7 +22,6 @@ export const InputArea = memo((props: InputAreaProps) => {
     const {
         className,
         children,
-        // onChange,
         role,
         type,
         valueDispatch,

@@ -24,7 +24,6 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
         event.preventDefault();
 
         try {
-             // let list_maintenances = await MainAPI.get_data(`service/api/maintenance/?type_of_maintenance=Все модели&service_company=Все модели&machine=Все модели`)
             let list_maintenances = await MainAPI.get_data(`service/api/maintenance/?`+
 
             `&type_of_maintenance=${!!queryParameters.type_of_maintenance ? queryParameters.type_of_maintenance :"Все модели"}`+
@@ -32,6 +31,7 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
             `&machine=${!!queryParameters.machine_number_maintenance ? queryParameters.machine_number_maintenance :"Все модели"}`
             )
                 dispatch(MaintenanceInfo(list_maintenances))
+                console.log(maintenance.filter_data.machine)
             if (!list_maintenances){
                 alert("Такого номера не существует")
             }
@@ -108,7 +108,7 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
                   <option >Все модели</option>
                   {maintenance &&
                       Object.values(maintenance.filter_data.machine).map((model) => (
-                        <option key={model['machine__factory_number']}>{model['machine__factory_number']}</option>
+                        <option key={model['factory_number']}>{model['factory_number']}</option>
                     ))}
                 </Form.Control>
               </Form.Group>

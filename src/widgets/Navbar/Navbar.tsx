@@ -121,7 +121,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
         >
             <Navbar className={classNames(cls.Navbar, mods, [className])}
             {...otherProps}
-                bg="dark" variant="dark" expand="lg" >
+                bg="primary" variant="dark" expand="lg" >
               <Container>
                 <Navbar.Brand href="#"><img className={cls.Brand} src={brand}/> </Navbar.Brand>
                 <Nav className="me-auto">
@@ -139,7 +139,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
                       </NavDropdown>
                   }
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse className={cls.Navbar} id="basic-navbar-nav">
                     <h6 className="text-white">{user_name}</h6>
                   <Nav className="ms-auto">
                     <Nav.Link href="#">Электронная сервисная книжка Мой Силант</Nav.Link>

@@ -21,6 +21,7 @@ export interface Complaints{
             'failure_node': object
             'recovery_method': object
             'service_company': object
+            'machine': object
                 }
 
 

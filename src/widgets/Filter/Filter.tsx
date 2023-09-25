@@ -28,10 +28,8 @@ export const Filter = memo((props: FilterProps) => {
 
         try {
             let list_machine = await MainAPI.get_data(
-                // 'service/api/machine_list/?factory_number=&machine_model=Все модели&engine_model=Все модели&transmission_model=Все модели&driving_bridge_model=Все модели&controlled_bridge_model=Все модели'
                 `service/api/machine_list/?`+
 
-            // `${!!queryParameters.factory_number ? `factory_number=${queryParameters.factory_number}` :"factory_number="}` +
             `machine_model=${!!queryParameters.machine_model ? queryParameters.machine_model :"Все модели"}`+
             `&engine_model=${!!queryParameters.engine_model ? queryParameters.engine_model :"Все модели"}`+
             `&transmission_model=${!!queryParameters.transmission_model ? queryParameters.transmission_model :"Все модели"}`+
@@ -73,13 +71,6 @@ export const Filter = memo((props: FilterProps) => {
             {...otherProps}
         >
             <Form className={cls.Form}>
-            {/*  <Form.Group className={cls.Input} controlId="formSerialNumber">*/}
-            {/*    <Form.Label>Заводской номер машины</Form.Label>*/}
-            {/*    <Form.Control onChange={event => {*/}
-            {/*    setQueryParam("factory_number", event.target.value)*/}
-            {/*}} type="text" placeholder="Введите заводской номер" />*/}
-            {/*  </Form.Group>*/}
-
               <Form.Group className={cls.Input} controlId="formModel">
                 <Form.Label>Модель техники</Form.Label>
                 <Form.Control

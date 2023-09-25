@@ -5,7 +5,6 @@ import {Button, Table} from "react-bootstrap";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {carInfoSlice} from "../../providers/Api/slice/CarSlice";
 import {useNavigate} from "react-router-dom";
-import {TableCar} from "../../widgets/TableCar/TableCar";
 import {TableComplaints} from "../../widgets/TableComplaints/TableComplaints";
 import {TableMaintenance} from "../../widgets/TableMaintenance/TableMaintenance";
 import {Filter} from "../../widgets/Filter/Filter";
@@ -21,25 +20,12 @@ interface TableListCarProps {
 export const TableListCar = memo((props: TableListCarProps) => {
     const dispatch = useAppdispatch()
     const {numberCars} = carInfoSlice.actions
-    const {numberCar} = useAppSelector(state => state.carInfo)
-    const {role} = useAppSelector(state=>state.authReducer)
-    const {car} = useAppSelector(state => state.carInfo)
     const {listMachine} =useAppSelector(state => state.listMachine)
-    const [updateRole, setUpdateRole] = useState("client")
     const [isCar,setIsCar]=useState<boolean>(true)
     const [isComplaints, setIsComplaints]=useState<boolean>()
     const [isMaintenance,setIsMaintenance]=useState<boolean>()
 
     const navigate = useNavigate()
-    // const [listMachine, setListMachine] = useState()
-    const [showModal, setShowModal] = useState(false);
-
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-
 
 
 
@@ -107,7 +93,6 @@ export const TableListCar = memo((props: TableListCarProps) => {
                             </tbody>
                     </Table>
                 </div>
-                // <TableCar updateRole={updateRole}/>
             }
             {isComplaints &&
                 <div>
@@ -121,9 +106,6 @@ export const TableListCar = memo((props: TableListCarProps) => {
                     <TableMaintenance/>
                 </div>
             }
-
-
-
             {children}
         </div>
     );

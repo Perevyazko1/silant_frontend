@@ -4,7 +4,6 @@ import cls from "./TableMaintenance.module.scss"
 import {Button, Form, Modal, Table} from "react-bootstrap";
 import {useAppdispatch, useAppSelector} from "../../shared/hooks/Redux/redux";
 import {maintenanceInfoSlice} from "../../providers/Api/slice/MaintenanceSlice";
-import {Maintenance} from "../../providers/Api/models/Maintenance";
 import moment from 'moment'
 import MainAPI from "../../providers/Api/axios";
 
@@ -12,19 +11,13 @@ interface TableMaintenanceProps {
     className?: string
     children?: ReactNode
 }
-//TODO настроить перезагрузку страницы после добавления ТО
 
 export const TableMaintenance = memo((props: TableMaintenanceProps) => {
         const dispatch = useAppdispatch()
         const {unit_maintenance} =useAppSelector(state=>state.maintenanceInfo)
         const {maintenance} = useAppSelector(state=>state.maintenanceInfo)
-        const {MaintenanceInfo} = maintenanceInfoSlice.actions
         const {MaintenanceUnit} = maintenanceInfoSlice.actions
-        const {role} = useAppSelector(state=>state.authReducer)
-        const {car} = useAppSelector(state => state.carInfo)
-        const [user_name, setUser_name] = useState(localStorage.getItem("first_name_user"))
         const [show, setShow] = useState(false);
-        const [idM, setIdm] = useState<string>()
         const {MaintenanceIsDDownload} = maintenanceInfoSlice.actions
         const {ResetMaintenance} = maintenanceInfoSlice.actions
         const [updateRole, setUpdateRole] = useState("client")
@@ -143,7 +136,7 @@ export const TableMaintenance = memo((props: TableMaintenanceProps) => {
                                 >
                                     {
                                       Object.values(maintenance.filter_data.machine).map((model) => (
-                                        <option key={model['machine__factory_number']}>{model['machine__factory_number']}</option>
+                                        <option key={model['factory_number']}>{model['factory_number']}</option>
                                     ))}
                                 </Form.Control>
                             </td>

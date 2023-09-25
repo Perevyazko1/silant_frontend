@@ -24,7 +24,6 @@ export const FilterComplaints = memo((props: FilterComplaintsProps) => {
         event.preventDefault();
 
         try {
-             // let list_maintenances = await MainAPI.get_data(`service/api/maintenance/?type_of_maintenance=Все модели&service_company=Все модели&machine=Все модели`)
             let list_complaint = await MainAPI.get_data(`service/api/complaints/?`+
 
             `&failure_node=${!!queryParameters.failure_node ? queryParameters.failure_node :"Все модели"}`+

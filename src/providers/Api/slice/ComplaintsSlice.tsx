@@ -31,7 +31,8 @@ const initialState: ComplaintsInfoState = {
         'filter_data':{
             'failure_node': {},
             'recovery_method': {},
-            'service_company': {}
+            'service_company': {},
+            'machine': {}
                 }
 
     },

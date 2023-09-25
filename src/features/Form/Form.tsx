@@ -21,17 +21,9 @@ export const FormSearch = memo((props: FormProps) => {
     const {resetCar} = carInfoSlice.actions
     const {numberCar} = useAppSelector(state => state.carInfo)
     const {isLoadingCar} = carInfoSlice.actions
-    const {MaintenanceInfo} = maintenanceInfoSlice.actions
-    const {ComplaintsInfo} = complaintsInfoSlice.actions
     const {numberCars} =carInfoSlice.actions
-    const {ComplaintIsDDownload} = complaintsInfoSlice.actions
-    const {MaintenanceIsDDownload} = maintenanceInfoSlice.actions
-    const {unit_complaint} = useAppSelector(state=>state.complaintsInfo)
-    const {is_download_complaint} = useAppSelector(state => state.complaintsInfo)
-    const {is_download_maintenance} =useAppSelector(state => state.maintenanceInfo)
 
 
-    const [number_car,setNumber_car]=useState<string>()
 
 
 
@@ -42,9 +34,6 @@ export const FormSearch = memo((props: FormProps) => {
             dispatch(resetCar())
             let machine = await MainAPI.get_data(`service/api/machine/?factory_number=${numberCar}`)
             dispatch(infoCar(machine))
-            // console.log(machine)
-            // dispatch(MaintenanceInfo(maintenance))
-            // dispatch(ComplaintsInfo(complaints))
             dispatch((isLoadingCar(true)))
             if (!machine){
                 alert("Такого номера не существует или данная машина вам не доступна")
@@ -56,10 +45,6 @@ export const FormSearch = memo((props: FormProps) => {
         }}
 
 
-        // useEffect(()=>{
-        //     setNumber_car(numberCar)
-        //     dispatch()
-        // },[numberCar])
 
         useEffect(() => {
         const event = {

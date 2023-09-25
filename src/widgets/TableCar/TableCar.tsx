@@ -17,8 +17,6 @@ export const TableCar = memo((props: TableCarProps) => {
 
     const {role} = useAppSelector(state=>state.authReducer)
     const {car} = useAppSelector(state => state.carInfo)
-    const {listMachine} =useAppSelector(state => state.listMachine)
-    // const [updateRole, setUpdateRole] = useState("client")
 
     const {
         className,
