@@ -37,7 +37,6 @@ export const Filter = memo((props: FilterProps) => {
             `&controlled_bridge_model=${!!queryParameters.controlled_bridge_model ? queryParameters.controlled_bridge_model :"Все модели"}`
 
             )
-            console.log(list_machine)
             dispatch(ListMachineSlice(list_machine))
             if (!list_machine){
                 alert("Такого номера не существует")

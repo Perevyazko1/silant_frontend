@@ -31,7 +31,6 @@ export const FilterMaintenance = memo((props: FilterMaintenanceProps) => {
             `&machine=${!!queryParameters.machine_number_maintenance ? queryParameters.machine_number_maintenance :"Все модели"}`
             )
                 dispatch(MaintenanceInfo(list_maintenances))
-                console.log(maintenance.filter_data.machine)
             if (!list_maintenances){
                 alert("Такого номера не существует")
             }
