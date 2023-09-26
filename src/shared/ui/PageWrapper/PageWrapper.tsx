@@ -26,7 +26,6 @@ export const PageWrapper = memo((props: PageWrapperProps) => {
             className={classNames(cls.PageWrapper, mods, [className])}
             {...otherProps}
         >
-            <NavbarComponent/>
 
             {children}
             <Footer/>

@@ -121,7 +121,7 @@ export const NavbarComponent = memo((props: NavbarProps) => {
         >
             <Navbar className={classNames(cls.Navbar, mods, [className])}
             {...otherProps}
-                bg="primary" variant="dark" expand="lg" >
+                 variant="dark" expand="lg" >
               <Container>
                 <Navbar.Brand href="#"><img className={cls.Brand} src={brand}/> </Navbar.Brand>
                 <Nav className={cls.Element}>

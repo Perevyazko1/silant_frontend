@@ -24,7 +24,6 @@ export const TableListCar = memo((props: TableListCarProps) => {
     const [isCar,setIsCar]=useState<boolean>(true)
     const [isComplaints, setIsComplaints]=useState<boolean>()
     const [isMaintenance,setIsMaintenance]=useState<boolean>()
-
     const navigate = useNavigate()
 
 
